@@ -18,6 +18,8 @@ gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'paperclip', '~> 6.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
+gem 'haml', '~> 5.0', '>= 5.0.4'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
@@ -44,6 +46,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  gem 'factory_girl_rails', '~> 4.9'
 end
 
 group :development do
