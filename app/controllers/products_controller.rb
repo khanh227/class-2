@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only:[:new, :edit]
-  helper ProductHelper
 
   def index
     @products = Product.all.order('created_at DESC')

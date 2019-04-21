@@ -1,6 +1,9 @@
-.row
-  - @products.each do |product|
-    .col-md-3
-      %a{href: "/products/#{product.id}"}
-        %h2.book-title
-          #{product.name}
+- if @products.count == 0
+  %h1 There are no products currently
+- else
+  .row
+    - @products.each do |product|
+      .col-md-3
+        %a{href: "/products/#{product.id}"}
+          %h2.book-title
+            #{product.name}
