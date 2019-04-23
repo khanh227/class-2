@@ -1,15 +1,5 @@
 /tmp
 .evn
-<<<<<<< HEAD
-<<<<<<< HEAD
 /log/*
 log/
 *.*/*.log
-=======
-log/development.log
->>>>>>> 7ed1ee5... Update Issue-2 Pull-16
-=======
-/log/*
-log/
-*.*/*.log
->>>>>>> 3ee9f1b... 2: update Issue-2: Create Product Management #16
