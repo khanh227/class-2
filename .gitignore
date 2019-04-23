@@ -1,7 +1,5 @@
 /tmp
 .evn
 /log/*
-#ignore log folder
 log/
-#ignore file .log
 *.*/*.log
