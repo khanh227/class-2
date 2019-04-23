@@ -3,5 +3,5 @@
 /log/*
 # ignore log folder
 log/
-# ignore all logs
+# ignore all file .log
 **/*.log
