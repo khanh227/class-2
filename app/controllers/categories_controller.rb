@@ -17,11 +17,11 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save ? (redirect_to categories_path) : (render 'new')
+    @category.save ? redirect_to(categories_path) : render('new')
   end
 
   def update
-    category.update(category_params) ? (redirect_to categories_path) : (render 'edit')
+    category.update(category_params) ? redirect_to(categories_path) : render('edit')
   end
 
   def destroy
@@ -29,11 +29,11 @@ class CategoriesController < ApplicationController
     redirect_to categories_path
   end
 
-  def category
-    @category ||= Category.find(params[:id])
-  end
-
   private
+    def category
+      @category ||= Category.find(params[:id])
+    end
+
     def category_params
       params.require(:category).permit(:name, :enabled)
     end
