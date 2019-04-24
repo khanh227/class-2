@@ -11129,3 +11129,109 @@ Processing by ProductsController#show as HTML
 Completed 200 OK in 168ms (Views: 149.0ms | ActiveRecord: 1.6ms)
 
 
+Started GET "/products/10" for 127.0.0.1 at 2019-04-24 14:11:52 +0700
+  [1m[35m (18.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/hung/.rbenv/versions/2.6.1/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:37
+  Rendering products/show.html.haml within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/product_helper.rb:3
+  Rendered products/show.html.haml within layouts/application (38.4ms)
+Completed 200 OK in 837ms (Views: 780.9ms | ActiveRecord: 17.0ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2019-04-24 14:11:57 +0700
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.haml within layouts/application
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  ↳ app/views/products/index.html.haml:1
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY created_at DESC[0m
+  ↳ app/views/products/index.html.haml:5
+  Rendered products/index.html.haml within layouts/application (16.6ms)
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.haml:17
+Completed 200 OK in 131ms (Views: 125.9ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/products/11" for 127.0.0.1 at 2019-04-24 14:11:58 +0700
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:37
+  Rendering products/show.html.haml within layouts/application
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/product_helper.rb:3
+  Rendered products/show.html.haml within layouts/application (17.6ms)
+Completed 200 OK in 185ms (Views: 177.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2019-04-24 14:12:00 +0700
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.haml within layouts/application
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  ↳ app/views/products/index.html.haml:1
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY created_at DESC[0m
+  ↳ app/views/products/index.html.haml:5
+  Rendered products/index.html.haml within layouts/application (11.3ms)
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.haml:17
+Completed 200 OK in 161ms (Views: 157.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/products/10" for 127.0.0.1 at 2019-04-24 14:12:01 +0700
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:37
+  Rendering products/show.html.haml within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/product_helper.rb:3
+  Rendered products/show.html.haml within layouts/application (12.7ms)
+Completed 200 OK in 103ms (Views: 99.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/products" for 127.0.0.1 at 2019-04-24 14:18:01 +0700
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.haml within layouts/application
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  ↳ app/views/products/index.html.haml:1
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY created_at DESC[0m
+  ↳ app/views/products/index.html.haml:5
+  Rendered products/index.html.haml within layouts/application (35.1ms)
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 12.4ms)
+
+
+  
+SyntaxError (/home/hung/class-2/app/views/layouts/application.html.haml:30: syntax error, unexpected ensure, expecting end
+...:Util.html_safe(_erbout);ensure;@haml_buffer = @haml_buffer....
+...                         ^~~~~~
+/home/hung/class-2/app/views/layouts/application.html.haml:33: syntax error, unexpected end-of-input, expecting end):
+  
+app/views/layouts/application.html.haml:30: syntax error, unexpected ensure, expecting end
+app/views/layouts/application.html.haml:33: syntax error, unexpected end-of-input, expecting end
+Started GET "/products" for 127.0.0.1 at 2019-04-24 14:19:48 +0700
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.haml within layouts/application
+  [1m[36mProduct Load (1.2ms)[0m  [1m[34mSELECT "products".* FROM "products" ORDER BY created_at DESC[0m
+  ↳ app/views/products/index.html.haml:2
+  Rendered products/index.html.haml within layouts/application (8.0ms)
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.haml:17
+Completed 200 OK in 120ms (Views: 111.6ms | ActiveRecord: 6.9ms)
+
+
+Started GET "/products/10" for 127.0.0.1 at 2019-04-24 14:24:45 +0700
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT  "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:37
+  Rendering products/show.html.haml within layouts/application
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/helpers/product_helper.rb:3
+  Rendered products/show.html.haml within layouts/application (14.6ms)
+Completed 200 OK in 135ms (Views: 123.7ms | ActiveRecord: 4.4ms)
+
+
