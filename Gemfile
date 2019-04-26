@@ -33,7 +33,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'webmock', '~> 3.5', '>= 3.5.1'
+gem 'shoulda', '~> 3.6'
+gem 'rspec-activemodel-mocks', '~> 1.1'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
