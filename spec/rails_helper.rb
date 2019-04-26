@@ -19,6 +19,12 @@ require 'shoulda/matchers'
 require 'devise/test_helpers'
 require 'webmock/rspec'
 require 'rspec/active_model/mocks'
+require 'database_cleaner'
+
+DatabaseCleaner.strategy = :truncation
+
+# then, whenever you need to clean the DB
+DatabaseCleaner.clean
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
