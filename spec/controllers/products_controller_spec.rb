@@ -15,15 +15,15 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe 'get #new' do
+  describe 'GET #new' do
     before do
       sign_in user_1
       get :new
     end
 
     specify do
-    expect(response).to have_http_status(200) 
-    expect(response).to render_template(:new)
+      expect(response).to have_http_status(200) 
+      expect(response).to render_template(:new)
     end
   end 
 end
