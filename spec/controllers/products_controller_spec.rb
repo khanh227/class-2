@@ -26,4 +26,36 @@ RSpec.describe ProductsController, type: :controller do
       expect(response).to render_template(:new)
     end
   end 
+  
+  describe 'get #create' do
+    let(:params) do
+    {
+      product: {
+        name: 'asdfasd',
+        description: 'content'
+      }
+    }
+    end
+
+    context 'success' do
+      before { sign_in user_1 }
+
+      it { expect do
+        post :create, params: params
+      end.to change(Product, :count).by(1) }
+      product = Product.last
+      it { expect(product.name).to eq 'asdfasd' }
+      it { expect(product.description).to eq 'content' }
+    end
+
+    context 'failure' do
+      before do 
+        allow_any_instance_of(Product).to receive(:save).and_return(false)
+      end 
+
+      it { expect do
+        get :create, params: params
+      end.not_to change { Product } }
+    end
+  end
 end
