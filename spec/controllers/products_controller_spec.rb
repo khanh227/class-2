@@ -13,5 +13,17 @@ RSpec.describe ProductsController, type: :controller do
       expect(response).to render_template(:index) 
       expect(assigns(:products)).to eq [product_2, product_1]
     end
+  end
+
+  describe 'GET #new' do
+    before do
+      sign_in user_1
+      get :new
+    end
+
+    specify do
+      expect(response).to have_http_status(200) 
+      expect(response).to render_template(:new)
+    end
   end 
 end
