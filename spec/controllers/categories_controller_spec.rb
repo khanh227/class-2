@@ -11,5 +11,13 @@ RSpec.describe CategoriesController, type: :controller do
       expect(response).to have_http_status(200)
       expect(response).to render_template(:index)
     end
-  end  
+  end
+
+  describe 'GET #new' do
+    specify do
+      get :new
+      expect(response).to have_http_status(200)
+      expect(response).to render_template(:new)
+    end
+  end
 end
