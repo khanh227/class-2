@@ -13,11 +13,26 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
+  describe 'GET show' do
+    specify do
+      get :show, params: { id: category_1.id }
+      expect(response).to render_template(:show)
+      expect(assigns(:category)).to eq category_1
+    end
+  end
+
   describe 'GET new' do
     specify do
       get :new
       expect(response).to have_http_status(200)
       expect(response).to render_template(:new)
+    end
+  end
+
+  describe 'GET edit' do
+    specify do
+      get :edit, params: { id: category_1.id }
+      expect(response).to render_template(:edit)
     end
   end
 
@@ -32,7 +47,7 @@ RSpec.describe CategoriesController, type: :controller do
     context 'success' do
       specify do
         expect do
-          post :create, params: {category: params}
+          post :create, params: { category: params }
         end.to change(Category, :count).by(1)
         category = Category.last
         expect(category.name).to eq 'category 3'
@@ -48,7 +63,7 @@ RSpec.describe CategoriesController, type: :controller do
 
       specify do
         expect do
-          post :create, params: {category: params}
+          post :create, params: { category: params }
         end.not_to change(Category, :count)
         expect(response).to render_template(:new)
       end
@@ -65,7 +80,7 @@ RSpec.describe CategoriesController, type: :controller do
 
     context 'success' do
       before {
-        patch :update, params: {category: params, id: category_1.id}
+        patch :update, params: { category: params, id: category_1.id }
       }
 
       specify do
@@ -83,8 +98,8 @@ RSpec.describe CategoriesController, type: :controller do
 
       specify do
         expect do
-          patch :update, params: {category: params, id: category_1.id}
-        end.not_to change {category_1}
+          patch :update, params: { category: params, id: category_1.id }
+        end.not_to change { category_1 }
         expect(response).to render_template(:edit)
       end
     end
@@ -93,7 +108,7 @@ RSpec.describe CategoriesController, type: :controller do
   describe 'DELETE destroy' do
     specify do
       expect do
-        delete :destroy, params: {id: category_1.id}
+        delete :destroy, params: { id: category_1.id }
       end.to change(Category, :count).by(-1)
       expect(response).to redirect_to(categories_path)
     end
