@@ -69,8 +69,9 @@ RSpec.describe CategoriesController, type: :controller do
       }
 
       specify do
-        expect(Category.find(category_1[:id])[:name]).to eq('name_4')
-        expect(Category.find(category_1[:id])[:enabled]).to eq(true)
+        category_1.reload
+        expect(category_1.name).to eq('name_4')
+        expect(category_1.enabled).to eq(true)
         expect(response).to redirect_to(categories_path)
       end
     end
@@ -81,7 +82,10 @@ RSpec.describe CategoriesController, type: :controller do
       }
 
       specify do
-        patch :update, params: {category: params, id: category_1.id}
+        expect do
+          patch :update, params: {category: params, id: category_1.id}
+          category_1.reload
+        end.not_to change {category_1}
         expect(response).to render_template(:edit)
       end
     end
