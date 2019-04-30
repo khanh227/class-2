@@ -27,7 +27,7 @@ RSpec.describe ProductsController, type: :controller do
     end
   end 
 
-  describe 'GET #create' do
+  describe 'POST #create' do
     before { sign_in user_1 }
 
     let(:params) do
@@ -64,6 +64,43 @@ RSpec.describe ProductsController, type: :controller do
           post :create, params: params
         end.not_to change { Product }
       end 
+    end
+  end
+
+  describe 'PATH #update' do
+    before { sign_in user_1 }
+
+    let(:params) do
+    {
+      name: 'Product 2',
+      description: 'Product Description',
+      price: 15000,
+      quatity: 2
+    }
+    end
+
+    context 'success' do
+      specify do
+        expect do
+          patch :update, params: { product: params, id: product_1.id }
+          product_1.reload
+          expect(product_1.name).to eq 'Product 2'
+          expect(product_1.description).to eq 'Product Description'
+          expect(product_1.price).to eq 15000
+          expect(product_1.quatity).to eq 2
+        end
+      end
+    end
+
+    context 'failure' do
+      before { allow_any_instance_of(Product).to receive(:update).and_return(false) }
+      
+      specify do
+        expect do
+          patch :update, params: {product: params, id: product_1.id}
+        end.not_to change { product_1 }
+        expect(response).to render_template(:edit)
+      end
     end
   end
 end
