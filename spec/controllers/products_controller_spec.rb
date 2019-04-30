@@ -67,7 +67,7 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe 'PATH update' do
+  describe 'PATCH update' do
     before { sign_in user_1 }
 
     let(:params) do
