@@ -26,26 +26,32 @@ RSpec.describe ProductsController, type: :controller do
       expect(response).to render_template(:new)
     end
   end 
-  
+
   describe 'get #create' do
+    before { sign_in user_1 }
+
     let(:params) do
     {
       product: {
-        name: 'asdfasd',
-        description: 'content'
+        name: 'Product',
+        description: 'Product Description',
+        price: 10000,
+        quatity: 1
       }
     }
     end
 
     context 'success' do
-      before { sign_in user_1 }
-
-      it { expect do
-        post :create, params: params
-      end.to change(Product, :count).by(1) }
-      product = Product.last
-      it { expect(product.name).to eq 'asdfasd' }
-      it { expect(product.description).to eq 'content' }
+      specify do
+        expect do
+          post :create, params: params
+        end.to change(Product, :count).by(1)
+        product = Product.last
+        expect(product.name).to eq 'Product'
+        expect(product.description).to eq 'Product Description'
+        expect(product.price).to eq 10000
+        expect(product.quatity).to eq 1
+      end
     end
 
     context 'failure' do
@@ -53,9 +59,11 @@ RSpec.describe ProductsController, type: :controller do
         allow_any_instance_of(Product).to receive(:save).and_return(false)
       end 
 
-      it { expect do
-        get :create, params: params
-      end.not_to change { Product } }
+      specify do
+        expect do
+          post :create, params: params
+        end.not_to change { Product }
+      end 
     end
   end
 end
