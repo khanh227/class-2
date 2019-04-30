@@ -55,9 +55,9 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     context 'failure' do
-      before do 
-        allow_any_instance_of(Product).to receive(:save).and_return(false)
-      end 
+      before { 
+        allow_any_instance_of(Product).to receive(:save).and_return(false) 
+      }
 
       specify do
         expect do
