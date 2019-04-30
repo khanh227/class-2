@@ -89,4 +89,13 @@ RSpec.describe CategoriesController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE destroy' do
+    specify do
+      expect do
+        delete :destroy, params: {id: category_1.id}
+      end.to change(Category, :count).by(-1)
+      expect(response).to redirect_to(categories_path)
+    end
+  end
 end
