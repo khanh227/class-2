@@ -54,4 +54,36 @@ RSpec.describe CategoriesController, type: :controller do
       end
     end
   end
+
+  describe 'PATCH #update#id' do
+    let(:params) do
+      {
+        name: 'name_4',
+        enabled: true
+      }
+    end
+
+    context 'success' do
+      before {
+        patch :update, params: {category: params, id: category_1.id}
+      }
+
+      specify do
+        expect(Category.find(category_1[:id])[:name]).to eq('name_4')
+        expect(Category.find(category_1[:id])[:enabled]).to eq(true)
+        expect(response).to redirect_to(categories_path)
+      end
+    end
+
+    context 'failure' do
+      before {
+        allow_any_instance_of(Category).to receive(:update).and_return(false)
+      }
+
+      specify do
+        patch :update, params: {category: params, id: category_1.id}
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
 end
