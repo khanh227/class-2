@@ -96,15 +96,11 @@ RSpec.describe ProductsController, type: :controller do
       before { allow_any_instance_of(Product).to receive(:update).and_return(false) }
       
       specify do
-        patch :update, params: {product: params, id: product_1.id}
-        expect(response).to render_template(:edit)
-      end
-
-      specify 'nothing change product_1' do
         expect do
           patch :update, params: {product: params, id: product_1.id}
         end.not_to change { product_1 }
-      end 
+        expect(response).to render_template(:edit)
+      end
     end
   end
 end
