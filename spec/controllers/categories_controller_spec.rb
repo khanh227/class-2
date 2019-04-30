@@ -20,4 +20,38 @@ RSpec.describe CategoriesController, type: :controller do
       expect(response).to render_template(:new)
     end
   end
+
+  describe 'POST #create' do
+    let(:params) do
+      {
+        name: 'name_3',
+        enabled: false
+      }
+    end
+
+    context 'success' do
+      specify do
+        expect do
+          post :create, params: {category: params}
+        end.to change(Category, :count).by(1)
+        category = Category.last
+        expect(category.name).to eq 'name_3'
+        expect(category.enabled).to eq false
+        expect(response).to redirect_to(categories_path)
+      end
+    end
+
+    context 'failure' do
+      before {
+        allow_any_instance_of(Category).to receive(:save).and_return(false)
+      }
+
+      specify do
+        expect do
+          post :create, params: {category: params}
+        end.not_to change(Category, :count)
+        expect(response).to render_template(:new)
+      end
+    end
+  end
 end
