@@ -13,7 +13,7 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
+  describe 'GET new' do
     specify do
       get :new
       expect(response).to have_http_status(200)
@@ -21,7 +21,7 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
+  describe 'POST create' do
     let(:params) do
       {
         name: 'category 3',
@@ -55,7 +55,7 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
-  describe 'PATCH #update#id' do
+  describe 'PATCH update' do
     let(:params) do
       {
         name: 'category 4',
