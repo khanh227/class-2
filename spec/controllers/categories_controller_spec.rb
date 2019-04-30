@@ -28,27 +28,28 @@ RSpec.describe CategoriesController, type: :controller do
         enabled: false
       }
     end
+
     context 'success' do
       specify do
         expect do
           post :create, params: {category: params}
-          end.to change(Category, :count).by(1)
+        end.to change(Category, :count).by(1)
         category = Category.last
         expect(category.name).to eq 'name_3'
         expect(category.enabled).to eq false
-        expect(response).to have_http_status(302)
         expect(response).to redirect_to(categories_path)
       end
     end
+
     context 'failure' do
-      before do
+      before {
         allow_any_instance_of(Category).to receive(:save).and_return(false)
-      end
+      }
+
       specify do
         expect do
           post :create, params: {category: params}
-          end.not_to change(Category, :count)
-        expect(response).not_to have_http_status(302)
+        end.not_to change(Category, :count)
         expect(response).to render_template(:new)
       end
     end
