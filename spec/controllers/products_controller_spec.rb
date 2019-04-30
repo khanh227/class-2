@@ -83,11 +83,11 @@ RSpec.describe ProductsController, type: :controller do
       specify do
         expect do
           patch :update, params: { product: params, id: product_1.id }
-          expect(Product.find(product_1[:id])[:name]).to eq 'Product 2'
-          expect(Product.find(product_1[:id])[:description]).to eq 'Product Description'
-          expect(Product.find(product_1[:id])[:price]).to eq 15000
-          expect(Product.find(product_1[:id])[:quatity]).to eq 2
-          expect(response).to redirect_to product_path(product_1)
+          product_1.reload
+          expect(product_1.name).to eq 'Product 2'
+          expect(product_1.description).to eq 'Product Description'
+          expect(product_1.price).to eq 15000
+          expect(product_1.quatity).to eq 2
         end
       end
     end
@@ -99,6 +99,12 @@ RSpec.describe ProductsController, type: :controller do
         patch :update, params: {product: params, id: product_1.id}
         expect(response).to render_template(:edit)
       end
+
+      specify 'nothing change product_1' do
+        expect do
+          patch :update, params: {product: params, id: product_1.id}
+        end.not_to change { product_1 }
+      end 
     end
   end
 end
