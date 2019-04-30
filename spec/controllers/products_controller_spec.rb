@@ -5,7 +5,7 @@ RSpec.describe ProductsController, type: :controller do
   let!(:product_1) { create(:product) }
   let!(:product_2) { create(:product) }
     
-  describe 'get index' do
+  describe 'GET index' do
     before { get :index }
 
     specify do
@@ -27,7 +27,7 @@ RSpec.describe ProductsController, type: :controller do
     end
   end 
 
-  describe 'get #create' do
+  describe 'GET #create' do
     before { sign_in user_1 }
 
     let(:params) do
