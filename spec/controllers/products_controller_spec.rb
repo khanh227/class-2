@@ -5,7 +5,7 @@ RSpec.describe ProductsController, type: :controller do
   let!(:product_1) { create(:product) }
   let!(:product_2) { create(:product) }
     
-  describe 'get index' do
+  describe 'GET index' do
     before { get :index }
 
     specify do
@@ -15,7 +15,7 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe 'GET #new' do
+  describe 'GET new' do
     before do
       sign_in user_1
       get :new
@@ -27,7 +27,7 @@ RSpec.describe ProductsController, type: :controller do
     end
   end 
 
-  describe 'POST #create' do
+  describe 'POST create' do
     before { sign_in user_1 }
 
     let(:params) do
@@ -67,7 +67,7 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe 'PATH #update' do
+  describe 'PATH update' do
     before { sign_in user_1 }
 
     let(:params) do
@@ -101,6 +101,15 @@ RSpec.describe ProductsController, type: :controller do
         end.not_to change { product_1 }
         expect(response).to render_template(:edit)
       end
+    end
+  end
+
+  describe 'DELETE destroy' do
+    specify do
+      expect do
+        delete :destroy, params: {id: product_2.id}
+      end.to change(Product, :count).by(-1)
+      expect(response).to redirect_to products_path
     end
   end
 end
