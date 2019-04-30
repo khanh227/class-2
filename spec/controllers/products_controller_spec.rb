@@ -27,6 +27,45 @@ RSpec.describe ProductsController, type: :controller do
     end
   end 
 
+  describe 'POST #create' do
+    before { sign_in user_1 }
+
+    let(:params) do
+    {
+      product: {
+        name: 'Product',
+        description: 'Product Description',
+        price: 10000,
+        quatity: 1
+      }
+    }
+    end
+
+    context 'success' do
+      specify do
+        expect do
+          post :create, params: params
+        end.to change(Product, :count).by(1)
+        product = Product.last
+        expect(product.name).to eq 'Product'
+        expect(product.description).to eq 'Product Description'
+        expect(product.price).to eq 10000
+        expect(product.quatity).to eq 1
+      end
+    end
+
+    context 'failure' do
+      before { 
+        allow_any_instance_of(Product).to receive(:save).and_return(false) 
+      }
+
+      specify do
+        expect do
+          post :create, params: params
+        end.not_to change { Product }
+      end 
+    end
+  end
 
   describe 'PATH #update' do
     before { sign_in user_1 }
