@@ -5,7 +5,7 @@ RSpec.describe ProductsController, type: :controller do
   let!(:product_1) { create(:product) }
   let!(:product_2) { create(:product) }
     
-  describe 'GET index' do
+  describe 'get index' do
     before { get :index }
 
     specify do
