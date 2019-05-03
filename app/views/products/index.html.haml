@@ -1,9 +1,22 @@
-- if @products.count == 0
-  %h1 There are no products currently
-- else
-  .row
-    - @products.each do |product|
-      .col-md-3
-        %a{href: "/products/#{product.id}"}
-          %h2.book-title
-            #{product.name}
+%h1 List of Products
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Price
+    %th Quatity
+    %th Enabled
+    %th
+  - @products.each do |product|
+    %tr
+      %td= product.name
+      %td= product.description
+      %td= product.price
+      %td= product.quatity
+      %td= product.enabled
+      %td= link_to 'Show', product_path(product)
+      %td= link_to 'Edit', edit_product_path(product)
+      %td= link_to 'Destroy', product_path(product), 
+          method: :delete,                            
+          data: { confirm: 'Are you sure?' }          
+= link_to 'New Product', new_product_path 
