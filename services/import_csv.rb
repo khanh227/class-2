@@ -14,8 +14,13 @@ class ImportCsv
     @messages = "Success: #{@success}, Failure: #{@failure}"
   end
 
+  def csv_valid?
+    @messages = is_csv_file? ? 'message true' : 'message fail'
+    is_csv_file?
+  end
+
   private
-    def csv_valid?(file)
-      File.extname(file.original_filename) == '.csv'
+    def is_csv_file?
+      File.extname(@file.original_filename) == '.csv'
     end
 end 
