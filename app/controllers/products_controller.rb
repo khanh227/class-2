@@ -10,6 +10,10 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+  def show;end
+
+  def edit;end
+
   def create
     @product = Product.new(product_params.merge(user_id: current_user.id))
     redirect_to @product if @product.save
