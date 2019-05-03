@@ -1,11 +1,15 @@
 module Products
   class Importor < ImportCsv
     def perform
-      CSV.foreach(@file.path, headers: true) do |row|
-        product = product(row)
-        product.save ? @success += 1 : @failure += 1
+      if csv_valid?
+        CSV.foreach(@file.path, headers: true) do |row|
+          product = product(row)
+          product.save ? @success += 1 : @failure += 1
+        end
+        success
+      else
+        false
       end
-      success
     end
 
     def product(row)
