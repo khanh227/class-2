@@ -1,3 +1,5 @@
+require 'csv'
+
 module Products
   class Importor < ImportCsv
     def perform
