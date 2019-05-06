@@ -5,7 +5,7 @@ module Products
     end
 
     def perform
-      ExportCsv.new(objects, Product.column_names).perform
+      ExportCsv.new(@objects, Product.column_names).perform
     end
   end
 end
