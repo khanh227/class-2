@@ -7,17 +7,13 @@ module Products
     end
 
     def perform
+      header = ['Name', 'Description', 'Price', 'Enabled', 'Quatity']
       CSV.generate("\uFEFF") do |csv|
-        csv << self.send(:headers)
-        @products.each do |object|
-          csv << headers.map{ |attr| object.public_send(attr) }
+        csv << header
+        @products.each do |product|
+          csv << product
         end
       end
     end
-
-    private
-      def headers
-        Product.column_names
-      end
   end
 end
