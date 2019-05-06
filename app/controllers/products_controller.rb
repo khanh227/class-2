@@ -13,12 +13,11 @@ class ProductsController < ApplicationController
     @products = Product.order(created_at: :desc)
   end
 
-  def initialize_csv
-    Products::ProductGenerateCsv.new(display_products).perform
-  end
-
   def export_products
-    send_data initialize_csv, type: 'text/csv', filename: 'products.csv', disposition: 'attachment'
+    send_data Products::ProductGenerateCsv.new(display_products).perform,
+              type: 'text/csv',
+              filename: 'products.csv',
+              disposition: 'attachment'
   end
 
   def new
