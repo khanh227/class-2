@@ -1,7 +1,7 @@
 %h1 List of Products
 %table
   %tr
-    %th Name
+    %th Name 
     %th Description
     %th Price
     %th Quatity
@@ -19,4 +19,6 @@
       %td= link_to 'Destroy', product_path(product), 
           method: :delete,                            
           data: { confirm: 'Are you sure?' }          
-= link_to 'New Product', new_product_path 
+= link_to 'New Product', new_product_path, class: 'btn btn-primary'
+%br
+= link_to 'Export CSV Product', products_path(format: :csv), class: 'btn btn-primary'

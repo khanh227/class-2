@@ -3,7 +3,22 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only:[:new, :edit]
 
   def index
+    respond_to do |format|
+      format.html { display_products }
+      format.csv { export_products }
+    end
+  end
+
+  def display_products
     @products = Product.order(created_at: :desc)
+  end
+
+  def initialize_csv
+    Products::ProductGenerateCsv.new(display_products).perform
+  end
+
+  def export_products
+    send_data initialize_csv, type: 'text/csv', filename: 'products.csv', disposition: 'attachment'
   end
 
   def new

@@ -6,12 +6,21 @@ RSpec.describe ProductsController, type: :controller do
   let!(:product_2) { create(:product) }
     
   describe 'GET index' do
-    before { get :index }
+    context 'html' do
+      specify do
+        get :index, format: :html
+        expect(response).to have_http_status(200) 
+        expect(response).to render_template(:index) 
+        expect(assigns(:products)).to eq [product_2, product_1]
+      end
+    end
 
-    specify do
-      expect(response).to have_http_status(200) 
-      expect(response).to render_template(:index) 
-      expect(assigns(:products)).to eq [product_2, product_1]
+    context 'text/csv' do
+      specify do
+        get :index, format: :csv
+        expect(response.headers['Content-Type']).to eq('text/csv')
+        expect(response).to have_http_status(200)
+      end
     end
   end
 
