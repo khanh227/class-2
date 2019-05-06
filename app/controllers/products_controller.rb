@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
   end
 
   def export_products
-    send_data Products::ProductGenerateCsv.new(display_products).perform,
+    send_data Products::CsvGenerate.new(display_products).perform,
               type: 'text/csv',
               filename: 'products.csv',
               disposition: 'attachment'
