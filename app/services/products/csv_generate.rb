@@ -7,7 +7,7 @@ module Products
     end
 
     def perform
-      CSV.generate("\uFEFF") do |csv|
+      CSV.generate do |csv|
         csv << header
         @products.each do |product|
           csv << csv_row(product)
@@ -16,6 +16,7 @@ module Products
     end
 
     private
+
     def header
       header = ['Name', 'Description', 'Price', 'Enabled', 'Quatity']
       header
