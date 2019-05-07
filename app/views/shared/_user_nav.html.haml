@@ -1,0 +1,11 @@
+%nav.navbar.navbar-default
+  .container
+    .navbar-header
+      = link_to 'Category', categories_path , class: 'navbar-brand'
+      = link_to 'Product Management', products_path, class: 'navbar-brand'
+    %ul.nav.navbar-nav
+      %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to 'Add Product', new_product_path
+%p.notice= notice
+%p.alert= alert
