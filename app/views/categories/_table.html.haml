@@ -1,0 +1,13 @@
+%table.table.table-responsive.table-striped
+  %tr
+    %th Name
+    %th Enabled
+    %th
+  - @categories.each do |category|
+    %tr
+      %td= category.name
+      %td= category.enabled
+      %td.text-right
+        = link_to 'Edit', edit_category_path(category), class: 'btn btn-primary'
+        = link_to 'Show', category_path(category), class: 'btn btn-info'
+        = link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
