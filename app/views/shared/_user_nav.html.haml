@@ -2,6 +2,7 @@
   .container
     .navbar-header
       %h1=app_name
+      = link_to 'Home', root_path , class: 'navbar-brand'
       = link_to 'Category', categories_path , class: 'navbar-brand'
       = link_to 'Product Management', products_path, class: 'navbar-brand'
     %ul.nav.navbar-nav.navbar-right

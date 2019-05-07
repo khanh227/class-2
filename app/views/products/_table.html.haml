@@ -1,0 +1,19 @@
+%table.table.table-responsive.table-striped
+  %tr
+    %th Name
+    %th Description
+    %th Price
+    %th Quatity
+    %th Enabled
+    %th
+  - @products.each do |product|
+    %tr
+      %td= product.name
+      %td= product.description
+      %td= product.price
+      %td= product.quatity
+      %td= product.enabled
+      %td.text-right
+        = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
+        = link_to 'Show', product_path(product), class: 'btn btn-info'
+        = link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
