@@ -27,11 +27,8 @@ describe Products::Importor do
       context 'file is not csv' do
         specify do
           expect(service.csv_valid?).to eq false
+          expect(service.success?).to eq false
         end
-      end
-      
-      specify do
-        expect(service.success?).to eq false
       end
     end
   end
