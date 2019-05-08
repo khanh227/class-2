@@ -6,12 +6,12 @@ class ImportCsv
     @messages = ''
   end
 
-  def success
+  def success?
     @success == 0 ? false : true
   end
 
   def messages
-    @messages = "Success: #{@success}, Failure: #{@failure}"
+    @messages ||= "Success: #{@success}, Failure: #{@failure}"
   end
 
   def csv_valid?

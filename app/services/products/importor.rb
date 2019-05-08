@@ -7,7 +7,7 @@ module Products
       CSV.foreach(@file.path, headers: true) do |row|
         product(row).save ? @success += 1 : @failure += 1
       end
-      success
+      success?
     end
 
     private
