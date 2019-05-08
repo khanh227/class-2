@@ -1,5 +1,6 @@
 %table.table.table-responsive.table-striped
   %tr
+    %th Product Category
     %th Name
     %th Description
     %th Price
@@ -8,6 +9,7 @@
     %th
   - @products.each do |product|
     %tr
+      %td= product.category.name
       %td= product.name
       %td= product.description
       %td= product.price
