@@ -21,6 +21,6 @@ class ImportCsv
 
   private
     def is_csv_file?
-      File.extname(@file) == '.csv'
+      File.extname(@file.original_filename) == '.csv'
     end
 end 
