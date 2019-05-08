@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe Products::Importor do
   let(:service) { Products::Importor.new(file_import: file) }
+  let(:file) { fixture_file_upload('spec/fixtures/products.csv') }
 
   describe '#perform' do
     context 'success' do
-      let(:file) { fixture_file_upload('spec/fixtures/products.csv') }
       specify do
         expect do 
           service.perform
@@ -21,15 +21,20 @@ describe Products::Importor do
     end
 
     context 'failure' do
-      let(:file) { fixture_file_upload('spec/fixtures/products.txt') }
-      before { allow_any_instance_of(Product).to receive(:save).and_return(false) }
-
       context 'file is not csv' do
+        let(:file) { fixture_file_upload('spec/fixtures/products.txt') }
+
         specify do
           expect(service.csv_valid?).to eq false
-          expect(service.success?).to eq false
         end
       end
+
+      context 'saving failure'
+        before { allow_any_instance_of(Product).to receive(:save).and_return(false) }
+
+        specify do
+          expect(service.success?).to eq false
+        end
     end
   end
 end
