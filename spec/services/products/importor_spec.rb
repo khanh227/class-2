@@ -24,14 +24,14 @@ describe Products::Importor do
       let(:file) { fixture_file_upload('spec/fixtures/products.txt') }
       before { allow_any_instance_of(Product).to receive(:save).and_return(false) }
 
-      specify do
-        expect(service.success?).to eq false
-      end
-
       context 'file is not csv' do
         specify do
           expect(service.csv_valid?).to eq false
         end
+      end
+      
+      specify do
+        expect(service.success?).to eq false
       end
     end
   end
