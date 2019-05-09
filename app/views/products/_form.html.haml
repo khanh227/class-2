@@ -1,5 +1,5 @@
 = simple_form_for @product, html: { multipart: true} do |f|
-  = f.input :category_id, collection: @categories
+  = f.input :category_id, collection: category_list, label_method: :name, value_method: :id
   = f.input :name, label: 'Product Name', require: true
   = f.input :description, require: true
   = f.input :price, require: true
