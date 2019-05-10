@@ -21,6 +21,3 @@
 //= require moment-timezone-with-data
 //= require tempusdominus-bootstrap-4
 //= require_tree .
-$('.datetimepicker').datetimepicker({
-        format:'d M Y H:i'
-      });
