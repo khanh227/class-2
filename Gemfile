@@ -41,7 +41,7 @@ gem 'rspec-activemodel-mocks', '~> 1.1'
 gem 'faker', '~> 1.9', '>= 1.9.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'bootstrap-datepicker-rails', '~> 1.8', '>= 1.8.0.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
