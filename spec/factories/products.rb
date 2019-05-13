@@ -4,6 +4,7 @@ FactoryGirl.define do
     description { "Description #{SecureRandom.hex}" }
     price { rand(10000..90000) }
     quatity { rand(1..99) }
+    category
     user
   end
 end

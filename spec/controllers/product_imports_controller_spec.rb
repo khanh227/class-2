@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ProductImportsController, type: :controller do
-  
+  let!(:user) { create(:user) }
+
+  before { sign_in user }
+
   describe '#import' do
     context 'success' do
       before { allow_any_instance_of(Products::Importor).to receive(:perform).and_return(true) } 

@@ -14,9 +14,7 @@
       = render partial: 'shared/nav'
     .container
       .row
-        .col-sm-6.col-sm-offset-3.text-center
-          %p.notice= notice
-          %p.alert= alert
+        = render partial: 'shared/notice'
       - if user_signed_in?
         = yield
       - else

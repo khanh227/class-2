@@ -1,10 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  let!(:user_1) { create(:user) }
+  let!(:user) { create(:user) }
+
+  let!(:category) { create(:category) }
+
   let!(:product_1) { create(:product) }
   let!(:product_2) { create(:product) }
-    
+
+  before { sign_in user }
+
   describe 'GET index' do
     before { get :index }
 
@@ -16,10 +21,7 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe 'GET new' do
-    before do
-      sign_in user_1
-      get :new
-    end
+    before { get :new }
 
     specify do
       expect(response).to have_http_status(200) 
@@ -28,15 +30,14 @@ RSpec.describe ProductsController, type: :controller do
   end 
 
   describe 'POST create' do
-    before { sign_in user_1 }
-
     let(:params) do
     {
       product: {
         name: 'Product',
         description: 'Product Description',
         price: 10000,
-        quatity: 1
+        quatity: 1,
+        category_id: category.id
       }
     }
     end
@@ -68,14 +69,13 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe 'PATCH update' do
-    before { sign_in user_1 }
-
     let(:params) do
     {
       name: 'Product 2',
       description: 'Product Description',
       price: 15000,
-      quatity: 2
+      quatity: 2,
+      category: category.id
     }
     end
 
