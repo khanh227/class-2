@@ -1,25 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe MenusController, type: :controller do
-  let!(:user_1) { create(:user) }
-  let!(:menu_1) { create(:menu) }
-  let!(:menu_2) { create(:menu) }
+  render_views
+
+  let!(:user) { create(:user) }
+  let(:product_1) { create(:product, name: 'Product 1') }
+  let(:product_2) { create(:product, name: 'Product 2') }
+  let(:product_3) { create(:product, name: 'Product 3') }
+
+  let!(:menu_1) { create(:menu, product_ids: [product_1.id, product_2.id]) }
+  let!(:menu_2) { create(:menu, product_ids: [product_3.id]) }
+
+  before { sign_in user }
     
   describe 'GET index' do
     before { get :index }
 
     specify do
-      expect(response).to have_http_status(302) 
+      expect(response).to have_http_status(200) 
       expect(response).to render_template(:index) 
-      expect(assigns(:menus)).to eq [menu_2, menu_1]
+      expect(assigns(:menus)).to eq [menu_1, menu_2]
     end
   end
 
   describe 'GET new' do
-    before do
-      sign_in user_1
-      get :new
-    end
+    before { get :new }
 
     specify do
       expect(response).to have_http_status(200) 
@@ -28,13 +33,12 @@ RSpec.describe MenusController, type: :controller do
   end 
 
   describe 'POST create' do
-    before { sign_in user_1 }
 
     let(:params) do
     {
-      menu: {
+      menu_1: {
         menu_date: '15/05/2019',
-        product_ids: [1,2],
+        product_ids: [2,3],
         created_by: 1
       }
     }
@@ -45,10 +49,10 @@ RSpec.describe MenusController, type: :controller do
         expect do
           post :create, params: params
         end.to change(Menu, :count).by(1)
-        product = Menu.last
-        expect(menu.menu_date).to eq '15/05/2019'
-        expect(menu.product_ids).to eq [1,2]
-        expect(menu.created_by).to eq 1
+        product = Menu.first
+        expect(menu_1.menu_date).to eq '15/05/2019'
+        expect(menu_1.products.first).to eq [2]
+        expect(menu_1.created_by).to eq 1
       end
     end
 
@@ -66,14 +70,11 @@ RSpec.describe MenusController, type: :controller do
   end
 
   describe 'PATCH update' do
-    before { sign_in user_1 }
 
     let(:params) do
     {
       menu: {
-        menu_date: '16/05/2019',
-        product_ids: [3,4],
-        created_by: 2
+        product_ids: [3],
       }
     }
     end
@@ -83,9 +84,7 @@ RSpec.describe MenusController, type: :controller do
         expect do
           patch :update, params: { menu: params, id: menu_1.id }
           menu_1.reload
-          expect(menu_1.menu_date).to eq '16/05/2019'
-          expect(menu_1.product_ids).to eq [3,4]
-          expect(menu_1.created_by).to eq 2
+          expect(menu_1.products).to eq [3]
         end
       end
     end
