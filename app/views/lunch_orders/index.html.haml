@@ -1,0 +1,6 @@
+%h2 List of Lunch Orders
+.text-right
+  = link_to 'New Lunch Order', new_lunch_order_path , class: 'btn btn-primary'
+%hr
+.panel.panel-default
+  = render partial: 'table'

@@ -1,0 +1,7 @@
+= simple_form_for @lunch_order do |f|
+  %p
+    = f.date_select :order_date, order: [:day, :month, :year]
+  %p
+    = f.submit
+  %p
+    = link_to 'Back To Index', lunch_orders_path

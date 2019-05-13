@@ -1,0 +1,3 @@
+class LunchOrder < ApplicationRecord
+
+end
