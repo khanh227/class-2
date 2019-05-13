@@ -18,7 +18,12 @@ module Products
       product.description = row['description']
       product.price = row['price']
       product.quatity = row['quatity']
+      product.category = category(row['category'])
       product
+    end
+
+    def category(category_name)
+      @category = ?
     end
   end
 end

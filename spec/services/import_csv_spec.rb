@@ -5,8 +5,7 @@ describe ImportCsv do
   let!(:service) { Products::Importor.new(file_import: file) }
 
   specify do
-    expect(service.success).to eq false
-    expect(service.messages).not_to eq ''
+    expect(service.success?).to eq false
     expect(service.csv_valid?).to eq true
   end
 end
