@@ -37,9 +37,9 @@ RSpec.describe MenusController, type: :controller do
     let(:params) do
     {
       menu_1: {
-        menu_date: '15/05/2019',
+        menu_date: '2019-05-15',
         product_ids: [2,3],
-        created_by: 1
+        created_by: user.id
       }
     }
     end
@@ -49,10 +49,10 @@ RSpec.describe MenusController, type: :controller do
         expect do
           post :create, params: params
         end.to change(Menu, :count).by(1)
-        product = Menu.first
-        expect(menu_1.menu_date).to eq '15/05/2019'
-        expect(menu_1.products.first).to eq [2]
-        expect(menu_1.created_by).to eq 1
+        product = Menu.last
+        expect(menu_1.menu_date).to eq '2019-05-15'
+        expect(menu_1.products.first).to eq [3]
+        expect(menu_1.created_by).to eq user.id
       end
     end
 
