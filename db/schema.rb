@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_05_13_030446) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.datetime "menu_date", null: false
+    t.date "menu_date", null: false
     t.integer "product_ids", default: [], array: true
     t.integer "created_by"
     t.datetime "created_at", null: false
