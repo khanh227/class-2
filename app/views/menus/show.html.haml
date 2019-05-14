@@ -3,10 +3,13 @@
     %h2.book-title
       = @menu.menu_date
     %h3.book-author
-      = "List of Product: #{@menu.product_ids}"
+      = "List of Menu:"
     %span.number-of-reviews
-      = "User: #{@menu.user_id}"
-    %p.book-desc= @menu.product_id
+      = "User: #{@menu.user.email}"
+    %p.book-desc
+      - @menu.products.each do |product|
+        %ul
+          %li= product.name
   .links.btn-group
     = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
     - if user_can_edit_menu

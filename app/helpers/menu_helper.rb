@@ -1,6 +1,6 @@
 module MenuHelper
   def user_can_edit_menu
-    user_signed_in? && @menu.user_id == current_user.id
+    user_signed_in? && @menu.created_by == current_user.id
   end
 
   def menu_list

@@ -6,9 +6,12 @@
     %th
   - @menus.each do |menu|
     %tr
-      %td= menu.menu_date
-      %td= menu.product_ids
-      %td= menu.user_id
+      %td= menu.menu_date.strftime("%d/%m/%Y")
+      %td
+        - menu.products.each do |product|
+          %ul
+            %li= product.name
+      %td= menu.user.email
       %td.text-right
         = link_to 'Edit', edit_menu_path(menu), class: 'btn btn-primary'
         = link_to 'Show', menu_path(menu), class: 'btn btn-info'

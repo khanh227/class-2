@@ -1,7 +1,6 @@
 class Menu < ApplicationRecord
-  has_many :product
-  #scope :enabled, ->{ where(enabled: :true) }
-  
+  belongs_to :user, foreign_key: 'created_by'
+
   def products
     Product.where(id: product_ids)    
   end

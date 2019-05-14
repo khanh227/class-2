@@ -31,10 +31,11 @@ class MenusController < ApplicationController
 
   private
     def menu
-      @menu ||= Menus.find(params[:id])
+      @menu ||= Menu.find(params[:id])
     end
 
     def menu_params
-      params.require(:menu).permit(:order_date, :product_ids, :user_id)
+      params[:menu][:product_ids]&.reject!(&:blank?)&.map!(&:to_i)
+      params.require(:menu).permit(:menu_date, :created_by, product_ids: [])
     end
 end
