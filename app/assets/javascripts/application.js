@@ -17,4 +17,7 @@
 //= require turbolinks
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+//= require moment/vi.js
+//= require moment-timezone-with-data
+//= require tempusdominus-bootstrap-4
 //= require_tree .
