@@ -54,6 +54,7 @@ RSpec.describe MenusController, type: :controller do
         menu = Menu.last
         expect(menu.menu_date.to_s).to eq '2019-05-15'
         expect(menu.products.first.name).to eq 'Product 1'
+        expect(menu.products).to eq [product_1, product_2]
         expect(menu.user.email).to eq 'test@test.com'
       end
     end
@@ -72,7 +73,6 @@ RSpec.describe MenusController, type: :controller do
   end
 
   describe 'PATCH update' do
-
     let(:params) do
     {
       menu: {
@@ -87,6 +87,7 @@ RSpec.describe MenusController, type: :controller do
           patch :update, params: { menu: params, id: menu_1.id }
           menu_1.reload
           expect(menu_1.products.first.name).to eq 'Product 3'
+          expect(menu_1.products).to eq product_3
         end
       end
     end
