@@ -16,11 +16,21 @@ ActiveRecord::Schema.define(version: 2019_05_13_030446) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "enabled", default: true
+    t.string "name"
+    t.boolean "enabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.datetime "menu_date", null: false
+    t.integer "product_ids", default: [], array: true
+    t.integer "user_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.index ["product_id"], name: "index_menus_on_product_id"
   end
 
   create_table "lunch_orders", force: :cascade do |t|
@@ -55,4 +65,5 @@ ActiveRecord::Schema.define(version: 2019_05_13_030446) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "menus", "products"
 end

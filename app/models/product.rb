@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user, optional: true
+  belongs_to :menu
   belongs_to :category
 
   validates :name, :description, :price, :quatity, presence: true

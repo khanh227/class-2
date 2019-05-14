@@ -1,0 +1,6 @@
+= simple_form_for @menus, html: { multipart: true} do |f|
+  = f.input :menu_date, require: true
+  = f.input :product_ids, require: true
+  = f.input :user_id
+  = f.input :product_id
+  = f.button :submit

@@ -1,0 +1,14 @@
+.col-md-8
+  .book-info
+    %h2.book-title
+      = @menu.menu_date
+    %h3.book-author
+      = "List of Product: #{@menu.product_ids}"
+    %span.number-of-reviews
+      = "User: #{@menu.user_id}"
+    %p.book-desc= @menu.product_id
+  .links.btn-group
+    = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
+    - if user_can_edit_menu
+      = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
+      = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
