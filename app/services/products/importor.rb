@@ -2,6 +2,8 @@ require 'csv'
 
 module Products
   class Importor < ImportCsv
+    attr_accessor :category, :product
+
     def perform
       return false unless csv_valid?
       CSV.foreach(@file.path, headers: true) do |row|
@@ -23,7 +25,7 @@ module Products
     end
 
     def category(category_name)
-      @category = ?
+      @category ||= Category.find_or_create_by(name: category_name)
     end
   end
 end

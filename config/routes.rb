@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :categories
   resources :lunch_orders, only: [:index, :show]
+  resources :menus
   resources :product_imports do
     collection { post :import }
   end
