@@ -9,8 +9,9 @@
   .card-body
     = simple_form_for :product, html: { multipart: true} do |f|
       .container
-      .row 
+      .row
         .col-lg-4
+          %h4 Products
           %select#sbOne{:multiple => "multiple"}
             - @products.each do |product|
               %ul
@@ -20,6 +21,7 @@
             %input#right{:type => "button", :value => ">"}
             %input#rightall{:type => "button", :value => ">>"}
         .col-lg-4
+          %h4 Order
           %select#sbTwo{:multiple => "multiple"}
           %div
             %input#left{:type => "button", :value => "<"}
