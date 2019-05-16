@@ -1,16 +1,26 @@
 .col-md-8
-  .book-info
-    %h2.book-title
-      = @menu.menu_date
-    %h3.book-author
-      List of Menu:
-    %span.number-of-reviews
-      = "User: #{@menu.user.email}"
-    %p.book-desc
-      - @menu.products.each do |product|
-        %ul
-          %li= product.name
   .links.btn-group
     = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
     = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
     = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
+  .book-info
+    %table.table
+      %tr
+        %td
+          Menu Date: 
+        %td
+          = @menu.menu_date.strftime("%d/%m/%Y")
+      %tr
+        %td
+          List of Menu: 
+      %tr
+        %td
+          User:
+        %td
+          = @menu.user.email
+      %tr
+        %td
+          - @menu.products.each do |product|
+            %ul
+              %li= product.name
+  

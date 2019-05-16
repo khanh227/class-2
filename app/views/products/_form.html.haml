@@ -6,3 +6,5 @@
   = f.input :enabled, as: :boolean
   = f.input :quatity, require: true, input_html: { value: f.object.quatity || '1' }
   = f.button :submit
+  %p
+    = link_to 'Back To Index', categories_path
