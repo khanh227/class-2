@@ -3,13 +3,14 @@
     %h2.book-title
       = @product.name
     %h3.book-author
-      = @product.price
-    %span.number-of-reviews
-      = "Quatity: #{@product.quatity}"
-    %p
-      %input{checked: "#{@product.enabled}", name: 'Enabled', type: 'checkbox'}/
-      Enabled
-    %p.book-desc= @product.description
+      = @product.description
+    %p.span.number-of-reviews
+      = "Price: #{@product.price}"
+    %p.span.number-of-reviews
+      = "Quality: #{@product.quatity}"
+    %p.span.number-of-reviews
+      = "Enabled: #{@product.enabled}"
+    
   .links.btn-group
     = link_to 'Back To Index', products_path, class: 'btn btn-custom'
     - if user_can_edit_product
