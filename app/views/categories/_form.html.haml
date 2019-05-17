@@ -1,9 +1,6 @@
-= simple_form_for @category do |f|
-  %p
-    = f.input :name, hint: 'Minimum 5 characters', error_html: {id: 'name_error'}
-  %p
-    = f.input :enabled
-  %p
-    = f.submit
+= simple_form_for (@category, remote: :true) do |f|
+  = f.input :name, hint: 'Minimum 5 characters', error_html: {id: 'name_error'}
+  = f.input :enabled
+  = f.button :submit
   %p
     = link_to 'Back To Index', categories_path

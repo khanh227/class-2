@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def display_status(status)
-    icon_class = status 
-    icon_class ? content_tag(:span, nil, class: 'glyphicon glyphicon-ok') : content_tag(:span, nil, class: 'glyphicon glyphicon-remove')
+    icon_class = status ? 'ok' : 'remove'
+    content_tag(:span, nil, class: "glyphicon glyphicon-#{icon_class}")
   end
 end
