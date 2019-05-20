@@ -6,7 +6,7 @@
   - @categories.each do |category|
     %tr
       %td= category.name
-      %td= category.enabled
+      %td= display_status(category.enabled)
       %td.text-right
         = link_to 'Edit', edit_category_path(category), class: 'btn btn-primary'
         = link_to 'Show', category_path(category), class: 'btn btn-info'

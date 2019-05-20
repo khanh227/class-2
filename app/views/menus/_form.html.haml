@@ -3,3 +3,5 @@
   = f.input :product_ids, input_html: { multiple: true, size: Product.enabled.count }, collection: Product.enabled.pluck(:name, :id), selected: f.object.product_ids
   = f.input :created_by, as: :hidden, input_html: { value: current_user.id }
   = f.button :submit
+  %p
+    = link_to 'Back To Index', menus_path
