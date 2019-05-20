@@ -1,11 +1,10 @@
 class CustomerOrdersController < ApplicationController
   def index
-    @lunch_order = lunch_order
     @customer_orders = lunch_order.customer_orders.order(created_at: :desc)
   end
 
   def show
-    customer_order
+    @customer_order = lunch_order.customer_orders.find(params[:id])
   end
 
   def new
@@ -13,7 +12,7 @@ class CustomerOrdersController < ApplicationController
   end
 
   def edit
-    customer_order
+    @customer_order = lunch_order.customer_orders.find(params[:id])
   end
 
   def create

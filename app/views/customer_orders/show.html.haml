@@ -7,5 +7,5 @@
 %p
   %strong Product ID:
   = @customer_order.product_id
-= link_to 'Edit', edit_lunch_order_customer_order_path(@customer_order)
+= link_to 'Edit', edit_lunch_order_customer_order_path(@lunch_order, @customer_order)
 = link_to 'Back To Index', lunch_order_customer_orders_path
