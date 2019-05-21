@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   resources :products
   devise_for :users
   resources :categories
-  resources :lunch_orders, only: [:index, :show] do
-    resources :customer_orders
-  end
+  resources :lunch_orders, only: [:index, :show]
+  resources :customer_orders
   resources :menus
   resources :product_imports do
     collection { post :import }

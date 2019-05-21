@@ -1,11 +1,13 @@
 %p
-  %strong User ID:
-  = @customer_order.user_id
+  %strong Customer:
+  = @customer_order.user.email
 %p
-  %strong Lunch Order ID:
-  = @customer_order.lunch_order_id
+  %strong Date/Time:
+  = @customer_order.lunch_order.order_date
 %p
-  %strong Product ID:
-  = @customer_order.product_id
-= link_to 'Edit', edit_lunch_order_customer_order_path(@lunch_order, @customer_order)
-= link_to 'Back To Index', lunch_order_customer_orders_path
+  %strong Lunch:
+  = @customer_order.product.name
+%p
+  %strong Bill:
+  = @customer_order.product.price
+= link_to 'Back To Index', customer_orders_path

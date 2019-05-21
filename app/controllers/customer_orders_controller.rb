@@ -1,31 +1,23 @@
 class CustomerOrdersController < ApplicationController
+  before_action :authenticate_user!, only:[:new, :edit, :index]
+
   def index
-    @customer_orders = lunch_order.customer_orders.order(created_at: :desc)
+    @customer_orders = CustomerOrder.where(user_id: current_user.id)
+    @prices = total(@customer_orders)
+  end
+
+  def total(customer_orders)
+    @total = 0
+
+    @customer_orders.each do |order|
+      @total += order.product.price
+    end
+
+    @total
   end
 
   def show
-    @customer_order = lunch_order.customer_orders.find(params[:id])
-  end
-
-  def new
-    @customer_order = lunch_order.customer_orders.new
-  end
-
-  def edit
-    @customer_order = lunch_order.customer_orders.find(params[:id])
-  end
-
-  def create
-    @customer_order = lunch_order.customer_orders.build(customer_order_params)
-    if @customer_order.save 
-      redirect_to lunch_order_customer_orders_path(lunch_order)
-    else
-      render('new')
-    end
-  end
-
-  def update
-    customer_order.update(customer_order_params) ? redirect_to(customer_orders_path) : render('edit')
+    customer_order
   end
 
   def destroy
@@ -36,10 +28,6 @@ class CustomerOrdersController < ApplicationController
   private
     def customer_order
       @customer_order ||= CustomerOrder.find(params[:id])
-    end
-
-    def lunch_order
-      @lunch_order ||= LunchOrder.find(params[:lunch_order_id])
     end
 
     def customer_order_params

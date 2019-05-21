@@ -1,15 +1,17 @@
 %table.table.table-responsive.table-striped
   %tr
-    %th User ID
-    %th Lunch Order ID
-    %th Product ID
-    %th
+    %th Customer
+    %th Date
+    %th Product
+    %th Price
   - @customer_orders.each do |customer_order|
     %tr
-      %td= customer_order.user_id
-      %td= customer_order.lunch_order_id
-      %td= customer_order.product_id
+      %td= current_user.email
+      %td= customer_order.lunch_order.order_date
+      %td= customer_order.product.name
+      %td= customer_order.product.price
       %td.text-right
-        = link_to 'Edit', edit_lunch_order_customer_order_path(@lunch_order, customer_order), class: 'btn btn-primary'
-        = link_to 'Show', lunch_order_customer_order_path(@lunch_order, customer_order), class: 'btn btn-info'
-        = link_to 'Destroy', lunch_order_customer_order_path(@lunch_order, customer_order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        = link_to 'Show', customer_order_path(customer_order), class: 'btn btn-info'
+        = link_to 'Destroy', customer_order_path(customer_order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+Total price:
+= @prices
