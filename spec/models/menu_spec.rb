@@ -6,13 +6,15 @@ RSpec.describe Menu, type: :model do
   end
 
   describe '#products' do
-    let!(:menu_1) { create(:menu) }
-    let!(:menu_2) { create(:menu) }
+  let(:product_1) { create(:product, name: 'Product 1') }
+  let(:product_2) { create(:product, name: 'Product 2') }
+  let(:product_3) { create(:product, name: 'Product 3') }
+  let!(:menu_1) { create(:menu, product_ids: [product_1.id, product_2.id]) }
+  let!(:menu_2) { create(:menu, product_ids: [product_3.id]) }
 
     specify do
-      expect(menu_1.products).to eq menu_1.product_ids
-      expect(menu_2.products).to eq menu_1.product_ids
-      expect(menu_1.products).to eq menu_2.product_ids
+      expect(menu_1.products).to eq [product_1, product_2]
+      expect(menu_2.products).to eq [product_3]
     end
   end
 end

@@ -1,5 +1,5 @@
 module CategoryHelper
   def category_list
-    Category.pluck(:name, :id)
+    Category.enabled.pluck(:name, :id)
   end
 end
