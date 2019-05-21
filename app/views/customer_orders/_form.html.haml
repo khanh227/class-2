@@ -1,0 +1,11 @@
+= simple_form_for @customer_order, url: new_lunch_order_customer_order_path do |f|
+  %p
+    = f.input :user_id
+  %p
+    = f.input :lunch_order_id
+  %p
+    = f.input :product_id
+  %p
+    = f.submit
+  %p
+    = link_to 'Back To Index', lunch_order_customer_orders_path

@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :category
 
+  has_many :customer_orders, dependent: :destroy
+
   validates :name, :description, :price, :quatity, presence: true
 
   scope :enabled, ->{ where(enabled: :true) }
