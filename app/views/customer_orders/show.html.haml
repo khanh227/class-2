@@ -5,9 +5,9 @@
   %strong Date/Time:
   = @customer_order.lunch_order.order_date
 %p
-  %strong Lunch:
+  %strong Product:
   = @customer_order.product.name
 %p
-  %strong Bill:
+  %strong Price:
   = @customer_order.product.price
 = link_to 'Back To Index', customer_orders_path

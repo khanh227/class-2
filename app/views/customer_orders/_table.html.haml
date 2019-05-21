@@ -12,5 +12,6 @@
       %td= customer_order.product.price
       %td.text-right
         = link_to 'Show', customer_order_path(customer_order), class: 'btn btn-info'
-Total price:
-= total(@customer_orders)
+%hr
+  Total price:
+  = bill_total(@customer_orders)
