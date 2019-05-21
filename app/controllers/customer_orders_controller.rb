@@ -7,6 +7,13 @@ class CustomerOrdersController < ApplicationController
     customer_order
   end
 
+  def cancel
+    customer_order.user_id = nil
+    customer_order.lunch_order_id = nil
+    customer_order.product_id = nil
+    redirect_to customer_orders_path
+  end
+
   private
     def customer_order
       @customer_order ||= CustomerOrder.find(params[:id])
