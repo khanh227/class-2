@@ -20,22 +20,30 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    if user.admin?
-      can :manage, :all
-    if user.restaurant?
-      user_restaurant
-    if user.customer?
-      user_customer
+    if user_signed_in?
+      user_permissions
+    else
+      cannot :manage, :all
     end
   end
 
   private
-    def user_restaurant
+    def user_restaurant_permissions
       can [:create, :read, :update, :destroy], Product
     end
 
-    def user_customer
+    def user_customer_permissions
       can :read, Product
+    end
+
+    def user_permissions
+      if user.admin?
+        can :manage, :all
+      elsif user.restaurant?
+        user_restaurant_permissions
+      else user.customer?
+        user_customer_permissions
+      end
     end
 end
 ```
