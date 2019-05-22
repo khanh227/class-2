@@ -41,7 +41,7 @@ class Ability
         can :manage, :all
       elsif user.restaurant?
         user_restaurant_permissions
-      else user.customer?
+      else
         user_customer_permissions
       end
     end
