@@ -19,13 +19,23 @@ class Ability
 
   def initialize(user)
     user ||= User.new
+
     if user.admin?
       can :manage, :all
     if user.restaurant?
-      can [:create, :read, :update, :destroy], Product
+      user_restaurant
     if user.customer?
-      can :read, Product
+      user_customer
     end
+
+    private
+      def user_restaurant
+        can [:create, :read, :update, :destroy], Product
+      end
+
+      def user_customer
+        can :read, Product
+      end
   end
 end
 ```
@@ -35,8 +45,8 @@ end
 ### Update file app/controllers/products_controller.rb
 ```ruby
   class ProductsController < ApplicationController
-    before_action :find_product, only: [:show, :edit, :update, :destroy]
     load_and_authorize_resource
+    before_action :find_product, only: [:show, :edit, :update, :destroy]
 
     def index
       respond_to do |format|
