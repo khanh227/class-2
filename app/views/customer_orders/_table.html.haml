@@ -12,7 +12,7 @@
       %td= customer_order.product.price
       %td.text-right
         = link_to 'Show', customer_order_path(customer_order), class: 'btn btn-info'
-        = link_to 'Cancel', customer_order_cancel_path(customer_order), class: 'btn btn-danger'
+        = link_to 'Cancel', customer_order_cancel_path(customer_order), method: :cancel, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 %hr
   Total price:
   = bill_total(@customer_orders)
