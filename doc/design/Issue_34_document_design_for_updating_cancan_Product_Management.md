@@ -27,16 +27,16 @@ class Ability
     if user.customer?
       user_customer
     end
-
-    private
-      def user_restaurant
-        can [:create, :read, :update, :destroy], Product
-      end
-
-      def user_customer
-        can :read, Product
-      end
   end
+
+  private
+    def user_restaurant
+      can [:create, :read, :update, :destroy], Product
+    end
+
+    def user_customer
+      can :read, Product
+    end
 end
 ```
 
