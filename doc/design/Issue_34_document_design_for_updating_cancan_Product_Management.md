@@ -1,93 +1,191 @@
-Issue-34: Update Cancan for Product Management
+## Issue-34-document-design: Compose document design for Product Management
 
-If user haven't logged in, the webpage just shows products list
-If User Logged in, the webpage display product management(product: list, create, edit product, delete product, show product detail).
+### Update cancan for Product Management
 
-- Update cancan for Product Management
+We need to use cancan as a new feature that set the rule for each type of users in Product Management.
 
-  + Add ability for user:
+What we need
+  - Create an ability to set the role for each type of users.
+  - Put ability into controls to apply the rule for functions.
+  - Put ability into views to apply what user can see.
+  - Expect any candidate be able to launch an Public Assessment.
 
-    + If user has admin role, they can manage all object.
+### ProductController
 
-    + If user has restaurant role, they can see products list, product detail, create product, update product.
+# Create a file with name: ability.rb in [app/models/ability.rb]
+```ruby
+class Ability
+  include CanCan::Ability
 
-    + If user has customer role (logged in), they can see product list, product details, cannot create product, update product. And more function in others object(category, order, total cost)
+  def initialize(user)
+    user ||= User.new
+    if user.admin?
+      can :manage, :all
+    if user.restaurant?
+      can [:create, :read, :update, :destroy], Product
+    if user.customer?
+      can :read, Product
+    end
+  end
+end
+```
 
-    + If user is guest user (unlogged in), they just can see product list.
-
-update cancan:
-  - In products_controller.rb 
-    we have to replace line 2 by method load_and_authorize_resource
-
-  - In ability.rb
-    - If user is admin
-    can :manage, all
-
-    - If user is restaurant
-    can :crud, @product
-
-    - If user is customer
-    can [:index, :show], @product
-
-
-ProductsController
-
-```# products_controller.rb
+```ruby
   class ProductsController < ApplicationController
-  load_and_authorize_resources
+    before_action :find_product, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
 
     def index
-      display a list of products
+      respond_to do |format|
+        format.html { display_products }
+        format.csv { export_products }
+      end
+    end
+
+    def display_products
+      @products = Product.order(created_at: :desc)
+    end
+
+    def export_products
+      send_data(
+        Products::ExportCsv.new(display_products).perform,
+        type: 'text/csv',
+        filename: 'products.csv',
+        disposition: 'attachment'
+        )
     end
 
     def new
-      a new empty variable @product
+      @product = Product.new
+    end
+
+    def show;end
+
+    def edit;end
+
+    def create
+      @product = Product.new(product_params.merge(user_id: current_user.id))
+      redirect_to @product if @product.save
     end
 
     def update
-      update a product with fields:
-        { name, description, enabled, price, quatity }
+      if @product.update(product_params)
+        redirect_to product_path(@product)
+      else
+        render 'edit'
+      end
     end
 
-    def create
-      create a new product
-      if success return this product details
-      else render new form
+    def destroy
+      redirect_to products_path if @product.destroy
     end
 
-    def edit
-      render edit form for updating
-    end
+    private
+      def product_params
+        params.require(:product).permit(:name, :description, :price, :enabled, :quatity, :user_id, :category_id)
+      end
 
-    def product_params
-      require params from form (new, edit)
-    end
-````
-
-```#update views
-----views/products/_table.html.haml
-CHANGE
-  = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
-  = link_to 'Show', product_path(product), class: 'btn btn-info'
-  = link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-TO
-  if can? edit
-    = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
-  if can? show
-    = link_to 'Show', product_path(product), class: 'btn btn-info'
-  if can? delete
-    = link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+      def find_product
+        @product ||= Product.find(params[:id])
+      end
+  end
 ```
 
-```
-----views/products/_index.html.haml
-CHANGE
-  = link_to 'New Product', new_product_path, class: 'btn btn-primary'
+# View 
+  - update cancan for **views/products/index.html.haml**
+  - update cancan for **views/products/_table.html.haml**
+  - update cancan for **views/product/show.html.haml**
+
+```ruby
+  %h2 List of Products
+.text-right
+  if can? :create, Product
+    = link_to 'New Product', new_product_path, class: 'btn btn-primary'
   = link_to 'Import', product_imports_path, class: 'btn btn-info'
   = link_to 'Export', products_path(format: :csv), class: 'btn btn-info'
-TO
-  if can? create
-    = link_to 'New Product', new_product_path, class: 'btn btn-primary'
-    = link_to 'Import', product_imports_path, class: 'btn btn-info'
-    = link_to 'Export', products_path(format: :csv), class: 'btn btn-info'
+%hr
+.panel.panel-default
+  = render partial: 'table'
 ```
+
+```ruby
+  %table.table.table-responsive.table-striped
+    %tr
+      %th Category
+      %th Name
+      %th Description
+      %th Price
+      %th Quatity
+      %th Enabled
+      %th
+    - @products.each do |product|
+      %tr
+        %td= product.category&.name
+        %td= product.name
+        %td= product.description
+        %td= product.price
+        %td= product.quatity
+        %td= display_status(product.enabled)
+        %td.text-right
+          - if can? :update, Product
+            = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
+          - if can? :read, Product
+            = link_to 'Show', product_path(product), class: 'btn btn-info'
+          - if can? :destroy, Product
+            = link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+```
+
+```ruby
+  .col-md-8
+    .links.btn-group
+    if can? :read, Product
+      = link_to 'Back To Index', products_path, class: 'btn btn-custom'
+      - if can? :update, Product
+        = link_to 'Edit', edit_product_path(@product) , class: 'btn btn-custom'
+      - if can? :destroy, Product
+        = link_to 'Delete', product_path(@product), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
+    .book-info
+      %table.table
+        %tr
+          %td
+            Name: 
+          %td
+            = @product.name
+        %tr
+          %td
+            Description: 
+          %td
+            = @product.description
+        %tr
+          %td
+            Description: 
+          %td
+            = @product.price
+        %tr
+          %td
+            Quatity: 
+          %td
+            = @product.quatity
+        %tr
+          %td
+            Enabled: 
+          %td
+            = display_status(@product.enabled)
+```
+
+
+
+# View: 
+  * Admin can manage all features.
+  * Restaurant can see index, show Product. Can create, update, destroy Product by the form on views
+  * Customer (logged in!): can see list Products, show product's detail, 
+
+### Ability
+  When user is an admin
+  - Can create, read, update, destroy Product
+
+  When user is restaurant
+  - Can create, read, update, destroy Product
+  
+  When user is customer
+  - Can read Products
