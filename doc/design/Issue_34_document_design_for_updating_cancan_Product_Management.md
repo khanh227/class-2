@@ -10,9 +10,9 @@ What we need
   - Put ability into views to apply what user can see.
   - Expect any candidate be able to launch an Public Assessment.
 
-### ProductController
+# Models
 
-# Create a file with name: ability.rb in [app/models/ability.rb]
+### Create a file with name: ability.rb in app/models/ability.rb
 ```ruby
 class Ability
   include CanCan::Ability
@@ -30,6 +30,9 @@ class Ability
 end
 ```
 
+# Controllers
+
+### Update file app/controllers/products_controller.rb
 ```ruby
   class ProductsController < ApplicationController
     before_action :find_product, only: [:show, :edit, :update, :destroy]
@@ -96,6 +99,7 @@ end
   - update cancan for **views/products/_table.html.haml**
   - update cancan for **views/product/show.html.haml**
 
+### Update **views/products/index.html.haml**
 ```ruby
   %h2 List of Products
 .text-right
@@ -108,6 +112,7 @@ end
   = render partial: 'table'
 ```
 
+### Update **views/products/_table.html.haml**
 ```ruby
   %table.table.table-responsive.table-striped
     %tr
@@ -135,6 +140,7 @@ end
             = link_to 'Destroy', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 ```
 
+### Update **views/products/index.html.haml**
 ```ruby
   .col-md-8
     .links.btn-group
@@ -172,8 +178,6 @@ end
           %td
             = display_status(@product.enabled)
 ```
-
-
 
 # View: 
   * Admin can manage all features.
