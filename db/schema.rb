@@ -16,23 +16,33 @@ ActiveRecord::Schema.define(version: 2019_05_16_020900) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "enabled", default: true
+    t.string "name"
+    t.boolean "enabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
   end
 
-  create_table "menus", force: :cascade do |t|
-    t.date "menu_date", null: false
-    t.integer "product_ids", default: [], array: true
-    t.integer "created_by"
+  create_table "customer_orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "lunch_order_id"
+    t.integer "product_id"
+    t.time "canceled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "lunch_order_id"], name: "index_customer_orders_on_user_id_and_lunch_order_id", unique: true
   end
 
   create_table "lunch_orders", force: :cascade do |t|
     t.date "order_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.datetime "menu_date", null: false
+    t.integer "product_ids", default: [], array: true
+    t.integer "created_by"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

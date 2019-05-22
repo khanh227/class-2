@@ -8,10 +8,13 @@ class CustomerOrdersController < ApplicationController
   end
 
   def cancel
-    customer_order.user_id = nil
-    customer_order.lunch_order_id = nil
-    customer_order.product_id = nil
-    redirect_to customer_orders_path
+    if customer_order.update_attribute(:canceled_at, Time.now)
+      redirect_to(customer_orders_path)
+      flash[:success] = 'You canceled order successful!'
+    else 
+      render('show')
+      flash[:failure] = 'You canceled order failure!'
+    end
   end
 
   private
@@ -20,6 +23,14 @@ class CustomerOrdersController < ApplicationController
     end
 
     def customer_order_params
-      params.require(:customer_order).permit(:user_id, :lunch_order_id, :product_id)
+      params.require(:customer_order).permit(:user_id, :lunch_order_id, :product_id, :canceled_at)
+    end
+
+    def success(message)
+      self[:success] = message
+    end
+
+    def failure(message)
+      self[:failure] = message
     end
 end 

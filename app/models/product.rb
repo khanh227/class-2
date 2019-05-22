@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :category
 
-  has_many :customer_orders, dependent: :destroy
+  has_many :customer_orders
 
   validates :name, :description, :price, :quatity, presence: true
 

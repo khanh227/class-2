@@ -10,4 +10,7 @@
 %p
   %strong Price:
   = @customer_order.product.price
+%p
+  %strong Canceled at:
+  = @customer_order.canceled_at
 = link_to 'Back To Index', customer_orders_path
