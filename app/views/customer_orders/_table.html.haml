@@ -14,7 +14,4 @@
       %td= customer_order.canceled_at
       %td.text-right
         = link_to 'Show', customer_order_path(customer_order), class: 'btn btn-info'
-        = link_to 'Cancel', customer_order_cancel_path(customer_order), method: :cancel, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-%hr
-  Total price:
-  = bill_total(@customer_orders)
+        = link_to 'Cancel', cancel_customer_order_path(customer_order), method: :post, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

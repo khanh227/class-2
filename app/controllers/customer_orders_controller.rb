@@ -8,12 +8,12 @@ class CustomerOrdersController < ApplicationController
   end
 
   def cancel
-    if customer_order.update_attribute(:canceled_at, Time.now)
+    if customer_order.update_attributes({ canceled_at: Time.current })
+      flash[:notice] = "You canceled order successful!"
       redirect_to(customer_orders_path)
-      flash[:success] = 'You canceled order successful!'
     else 
+      flash[:alert] = "You canceled order failure!"
       render('show')
-      flash[:failure] = 'You canceled order failure!'
     end
   end
 
@@ -24,13 +24,5 @@ class CustomerOrdersController < ApplicationController
 
     def customer_order_params
       params.require(:customer_order).permit(:user_id, :lunch_order_id, :product_id, :canceled_at)
-    end
-
-    def success(message)
-      self[:success] = message
-    end
-
-    def failure(message)
-      self[:failure] = message
     end
 end 

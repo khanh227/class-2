@@ -36,23 +36,22 @@ RSpec.describe CustomerOrdersController, type: :controller do
 
     context 'update success' do
       specify do
-        expect do
-          customer_order_1.update_attribute(:canceled_at, '10:00:00')
-        end.to change(customer_order_1, :canceled_at).to eq '2000-01-01 10:00:00.000000000 +0000'
-        expect(flash[:success]).to eq 'You canceled order successful!'
+        post :cancel, params: { id: customer_order_1 }
+        customer_order_1.reload
+        expect(customer_order_1.canceled_at).to eq Time.current
+        expect(flash[:notice]).to eq 'You canceled order successful!'
       end
     end
 
     context 'update failure' do
-      before {
-        allow_any_instance_of(CustomerOrder).to receive(:update_attribute).and_return(false)
-      }
+      before do
+        allow_any_instance_of(CustomerOrder).to receive(:update_attributes).and_return(false)
+        post :cancel, params: { id: customer_order_2 }
+      end
 
       specify do
-        expect do
-          customer_order_1.update_attribute(:canceled_at, '10:00:00')
-        end.not_to change(customer_order_1, :canceled_at)
-        expect(flash[:failure]).to eq 'You canceled order failure!'
+        expect(customer_order_2.canceled_at).to eq nil
+        expect(flash[:alert]).to eq 'You canceled order failure!'
       end
     end
   end

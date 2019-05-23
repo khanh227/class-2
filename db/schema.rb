@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_020900) do
     t.integer "user_id"
     t.integer "lunch_order_id"
     t.integer "product_id"
-    t.time "canceled_at"
+    t.datetime "canceled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "lunch_order_id"], name: "index_customer_orders_on_user_id_and_lunch_order_id", unique: true

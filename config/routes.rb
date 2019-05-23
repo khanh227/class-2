@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :categories
   resources :lunch_orders, only: [:index, :show]
   resources :customer_orders do
-      post 'cancel'
+    member do
+      post :cancel
+    end
   end
   resources :menus
   resources :product_imports do
