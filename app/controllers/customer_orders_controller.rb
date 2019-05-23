@@ -8,7 +8,7 @@ class CustomerOrdersController < ApplicationController
   end
 
   def cancel
-    if customer_order.update_attributes({ canceled_at: Time.now })
+    if customer_order.update_attribute(:canceled_at, Time.now)
       flash[:notice] = "You canceled order successful!"
       redirect_to(customer_orders_path)
     else 

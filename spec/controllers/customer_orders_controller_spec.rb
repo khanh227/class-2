@@ -51,7 +51,7 @@ RSpec.describe CustomerOrdersController, type: :controller do
 
     context 'update failure' do
       before do
-        allow_any_instance_of(CustomerOrder).to receive(:update_attributes).and_return(false)
+        allow_any_instance_of(CustomerOrder).to receive(:update_attribute).and_return(false)
         post :cancel, params: { id: customer_order_2 }
       end
 
