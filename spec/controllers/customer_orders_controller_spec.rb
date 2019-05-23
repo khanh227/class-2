@@ -34,11 +34,17 @@ RSpec.describe CustomerOrdersController, type: :controller do
   describe '#cancel' do
     let(:user) { user_1 }
 
+    around do |example|
+      Timecop.freeze(Time.zone.local(2017, 1, 1, 0, 0, 0)) do
+        example.run
+      end
+    end
+
     context 'update success' do
       specify do
         post :cancel, params: { id: customer_order_1 }
         customer_order_1.reload
-        expect(customer_order_1.canceled_at).to eq Time.current
+        expect(customer_order_1.canceled_at).to eq Time.now
         expect(flash[:notice]).to eq 'You canceled order successful!'
       end
     end

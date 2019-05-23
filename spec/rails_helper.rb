@@ -20,6 +20,7 @@ require 'devise/test_helpers'
 require 'webmock/rspec'
 require 'rspec/active_model/mocks'
 require 'database_cleaner'
+require 'timecop'
 
 DatabaseCleaner.strategy = :truncation
 
