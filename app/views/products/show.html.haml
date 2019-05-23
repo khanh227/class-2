@@ -1,8 +1,10 @@
 .col-md-8
   .links.btn-group
+  - if can? :read, Product
     = link_to 'Back To Index', products_path, class: 'btn btn-custom'
-    - if user_can_edit_product
+    - if can? :update, Product
       = link_to 'Edit', edit_product_path(@product) , class: 'btn btn-custom'
+    - if can? :destroy, Product  
       = link_to 'Delete', product_path(@product), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
   .book-info
     %table.table
