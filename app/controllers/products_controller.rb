@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only:[:new, :edit]
+  load_and_authorize_resource
 
   def index
     respond_to do |format|
@@ -10,7 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def display_products
-    @products = Product.order(created_at: :desc)
+    @products = @products.order(created_at: :desc)
   end
 
   def export_products
@@ -26,9 +25,13 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-  def show;end
+  def show
+    @product
+  end
 
-  def edit;end
+  def edit
+    @product
+  end
 
   def create
     @product = Product.new(product_params.merge(user_id: current_user.id))
@@ -50,9 +53,5 @@ class ProductsController < ApplicationController
   private
     def product_params
       params.require(:product).permit(:name, :description, :price, :enabled, :quatity, :user_id, :category_id)
-    end
-
-    def find_product
-      @product ||= Product.find(params[:id])
     end
 end
