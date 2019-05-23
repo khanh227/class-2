@@ -19,7 +19,7 @@ gem 'paperclip', '~> 6.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'haml', '~> 5.0', '>= 5.0.4'
-gem 'cancan', '~> 1.6', '>= 1.6.10'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 gem 'rails-controller-testing', '~> 0.0.3'
