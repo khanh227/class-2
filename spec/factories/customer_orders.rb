@@ -3,6 +3,5 @@ FactoryGirl.define do
     user
     product
     lunch_order
-    canceled_at nil
   end
 end

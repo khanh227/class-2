@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe CustomerOrdersController, type: :controller do
+  around do |example|
+    Timecop.freeze(Time.zone.local(2017, 1, 1, 0, 0, 0)) do
+      example.run
+    end
+  end
+
   let(:user_1) { create(:user) }
   let(:user_2) { create(:user) }
   let!(:customer_order_1) { create(:customer_order, user: user_1) }
@@ -33,12 +39,6 @@ RSpec.describe CustomerOrdersController, type: :controller do
 
   describe '#cancel' do
     let(:user) { user_1 }
-
-    around do |example|
-      Timecop.freeze(Time.zone.local(2017, 1, 1, 0, 0, 0)) do
-        example.run
-      end
-    end
 
     context 'update success' do
       specify do
