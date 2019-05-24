@@ -3,5 +3,5 @@
     %h1 Edit User
     = simple_form_for @user, html: { multipart: true } do |f|
       = f.input :email, readonly: true
-      = f.input :role_user, collection: user.role_users
+      = f.input :role_user, as: :select, collection: User.role_users.keys.to_a
       = f.button :submit

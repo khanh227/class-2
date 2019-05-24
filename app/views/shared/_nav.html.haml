@@ -3,7 +3,5 @@
     .navbar-header
       %h1=app_name
     %ul.nav.navbar-nav.navbar-right
-      - if can? :manage, User
-        %li= link_to 'User Manage', users_path
       %li= link_to 'Sign Up', new_user_registration_path
       %li= link_to 'Log In', new_user_session_path
