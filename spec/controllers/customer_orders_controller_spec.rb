@@ -40,7 +40,7 @@ RSpec.describe CustomerOrdersController, type: :controller do
   describe '#cancel' do
     let(:user) { user_1 }
 
-    context 'update success' do
+    context 'success' do
       specify do
         post :cancel, params: { id: customer_order_1 }
         customer_order_1.reload
@@ -49,7 +49,7 @@ RSpec.describe CustomerOrdersController, type: :controller do
       end
     end
 
-    context 'update failure' do
+    context 'failure' do
       before do
         allow_any_instance_of(CustomerOrder).to receive(:update_attribute).and_return(false)
         post :cancel, params: { id: customer_order_2 }
