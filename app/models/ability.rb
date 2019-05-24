@@ -19,9 +19,11 @@ class Ability
   private
     def restaurant_permissions
       can [:create, :read, :update, :destroy], Product
+      can :read, CustomerOrder
     end
 
     def customer_permissions
       can :read, Product
+      can [:read, :create, :cancel], CustomerOrder
     end
 end
