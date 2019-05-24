@@ -5,6 +5,14 @@ class CustomerOrdersController < ApplicationController
 
   def show; end
 
+  def create
+    @customer_order = CustomerOrder.new
+    @customer_order.user_id = current_user.id
+    @customer_order.lunch_order_id = LunchOrder.find_or_create_by(order_date: Date.today).id
+    @customer_order.product_id = @product.id
+    redirect_to(customer_orders_path) if @customer_order.save
+  end
+
   def cancel
     if customer_order.update_attribute(:canceled_at, Time.now)
       flash[:notice] = "You canceled order successful!"
