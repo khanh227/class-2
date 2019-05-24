@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :products
   has_many :menus, foreign_key: 'created_by'
+  has_many :customer_orders, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
