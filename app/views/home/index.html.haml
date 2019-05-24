@@ -1,18 +1,15 @@
-%link#bootstrap-css{:href => "//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css", :rel => "stylesheet"}/
-%script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"}
-%script{:src => "//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"}
 .cardborder-success.mb-3
   .card-header
     %h4.bold
       Date: 
-      = Time.current.localtime
+      = Time.current.strftime("%d/%m/%Y")
   .card-body
     = simple_form_for :product, html: { multipart: true} do |f|
-      .container
+      .container-fluid
       .row
         .col-lg-4
           %h4 Products
-          %select#sbOne{:multiple => "multiple"}
+          %select#sbOne{ :multiple => "multiple", :style => "font-size: 14px; width: 250px; height: 120px" }
             - @products.each do |product|
               %ul
                 %li 
@@ -22,7 +19,7 @@
             %input#rightall{:type => "button", :value => ">>"}
         .col-lg-4 
           %h4 Order
-          %select#sbTwo{:multiple => "multiple"}
+          %select#sbTwo{ :multiple => "multiple", :style => "font-size: 14px; width: 250px; height: 120px" }
           %div
             %input#left{:type => "button", :value => "<"}
             %input#leftall{:type => "button", :value => "<<"}
