@@ -1,0 +1,30 @@
+.col-md-8
+  .links.btn-group
+  - if can? :read, User
+    = link_to 'Back To Index', users_path, class: 'btn btn-custom'
+    - if can? :update, User
+      = link_to 'Edit', edit_user_path(@user) , class: 'btn btn-custom'
+    - if can? :destroy, User  
+      = link_to 'Delete', user_path(@user), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
+  .book-info
+    %table.table
+      %tr
+        %td
+          Email: 
+        %td
+          = @user.email
+      %tr
+        %td
+          Role: 
+        %td
+          = @user.role_user
+      %tr
+        %td
+          Created At: 
+        %td
+          = @user.created_at
+      %tr
+        %td
+          Updated at: 
+        %td
+          = @user.updated_at
