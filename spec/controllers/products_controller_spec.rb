@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'cancan/matchers'
 
 RSpec.describe ProductsController, type: :controller do
-  let!(:user) { create(:user) }
+  let!(:user) { create(:user, admin: true) }
 
   let!(:category) { create(:category) }
 
