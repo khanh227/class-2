@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @users = @users.order(created_at: :desc)
+    @users = @users.where.not(id: current_user.id).order(created_at: :desc)
   end
 
   def edit

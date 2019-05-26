@@ -46,8 +46,8 @@ RSpec.describe UsersController, type: :controller do
 
       specify do
         user_1.reload
-        expect(user_1.role_user).to eq(:customer)
-        expect(response).to redirect_to(users_path)
+        expect(user_1.role_user).to eq 'customer'
+        expect(response).to redirect_to(user_path)
       end
     end
 
