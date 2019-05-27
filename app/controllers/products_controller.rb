@@ -8,24 +8,11 @@ class ProductsController < ApplicationController
     end
   end
 
-  def display_products
-    @products = @products.order(created_at: :desc)
-  end
+  def new; end
 
-  def export_products
-    send_data(
-      Products::ExportCsv.new(display_products).perform,
-      type: 'text/csv',
-      filename: 'products.csv',
-      disposition: 'attachment'
-      )
-  end
+  def show; end
 
-  def new;end
-
-  def show;end
-
-  def edit;end
+  def edit; end
 
   def create
     @product = Product.new(product_params.merge(user_id: current_user.id))
@@ -45,6 +32,19 @@ class ProductsController < ApplicationController
   end
 
   private
+    def display_products
+      @products.order(created_at: :desc)
+    end
+
+    def export_products
+      send_data(
+        Products::ExportCsv.new(@products).perform,
+        type: 'text/csv',
+        filename: 'products.csv',
+        disposition: 'attachment'
+      )
+    end
+
     def product_params
       params.require(:product).permit(:name, :description, :price, :enabled, :quatity, :user_id, :category_id)
     end

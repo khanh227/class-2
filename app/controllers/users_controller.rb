@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
-  def index;end
+  def index; end
 
-  def edit;end
+  def edit; end
 
-  def show;end
+  def show; end
 
   def update
     if @user.update(user_params)
