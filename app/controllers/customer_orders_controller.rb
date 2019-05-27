@@ -1,9 +1,11 @@
 class CustomerOrdersController < ApplicationController
-  load_and_authorize_resource
+  def index
+    @customer_orders = CustomerOrder.where(user_id: current_user.id)
+  end
 
-  def index; end
-
-  def show; end
+  def show
+    customer_order
+  end
 
   def cancel
     if customer_order.update_attribute(:canceled_at, Time.now)
