@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  let!(:user) { create(:user) }
-
+  let!(:user) { create(:admin_user) }
   let!(:category) { create(:category) }
-
   let!(:product_1) { create(:product) }
   let!(:product_2) { create(:product) }
 
