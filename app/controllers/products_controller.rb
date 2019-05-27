@@ -21,17 +21,11 @@ class ProductsController < ApplicationController
       )
   end
 
-  def new
-    @product = Product.new
-  end
+  def new;end
 
-  def show
-    @product
-  end
+  def show;end
 
-  def edit
-    @product
-  end
+  def edit;end
 
   def create
     @product = Product.new(product_params.merge(user_id: current_user.id))
