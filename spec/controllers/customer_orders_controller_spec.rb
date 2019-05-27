@@ -23,7 +23,7 @@ RSpec.describe CustomerOrdersController, type: :controller do
     specify do
       expect(response).to have_http_status(200)
       expect(response).to render_template(:index)
-      expect(assigns(:customer_orders)) == [customer_order_1, customer_order_2]
+      expect(assigns(:customer_orders).to_a).to eq [customer_order_1, customer_order_2]
     end
   end
 
