@@ -1,28 +1,18 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
-  def index
-    @users = @users.where.not(id: current_user.id).order(created_at: :desc)
-  end
+  def index;end
 
-  def edit
-    @user
-  end
+  def edit;end
 
-  def show
-    @user
-  end
+  def show;end
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      redirect_to @user
     else
       render 'edit'
     end
-  end
-
-  def destroy
-    redirect_to users_path if @user.destroy
   end
 
   private
