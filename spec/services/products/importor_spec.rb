@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Products::Importor do
-  let!(:category) { create(:category) }
+  let(:category) { create(:category) }
   let(:service) { Products::Importor.new(file_import: file) }
   let(:file) { fixture_file_upload('spec/fixtures/products.csv') }
 
@@ -18,7 +18,7 @@ describe Products::Importor do
         expect(Product.last.price).to eq 0.98e5
         expect(Product.last.enabled).to eq true
         expect(Product.last.quatity).to eq 4
-        expect(Product.last.category_id).to eq Product.last.category.id
+        expect(Product.last.category_id).to eq category.id
       end
     end
 

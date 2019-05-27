@@ -21,6 +21,9 @@ describe User do
       expect(ability).to be_able_to(:update, Product)
       expect(ability).to be_able_to(:destroy, Product)
       expect(ability).to be_able_to(:read, CustomerOrder)
+      expect(ability).to be_able_to(:index, CustomerOrder)
+      expect(ability).to be_able_to(:show, CustomerOrder)
+      expect(ability).not_to be_able_to(:cancel, CustomerOrder)
     end
   end
 
