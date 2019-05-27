@@ -10,8 +10,10 @@ class CustomerOrdersController < ApplicationController
     @customer_order.user_id = current_user.id
     @customer_order.lunch_order_id = LunchOrder.find_or_create_by(order_date: Date.today).id
     @customer_order.product_id = @product.id
-    @product.quatity -= 1
-    redirect_to(customer_orders_path) if @customer_order.save
+    if @customer_order.save
+      @product.quatity -= 1
+      redirect_to(customer_orders_path) 
+    end
   end
 
   def cancel
