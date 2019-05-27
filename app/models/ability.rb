@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    @user = user ||= User.new
+    @user = user || User.new
 
     case
     when user.admin?
@@ -19,7 +19,7 @@ class Ability
   private
     def restaurant_permissions
       can [:create, :read, :update, :destroy], Product
-      can %i[read index show], CustomerOrder
+      can :read, CustomerOrder
       cannot :cancel, CustomerOrder
     end
 
