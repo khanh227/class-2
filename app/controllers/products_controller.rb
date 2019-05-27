@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to product_path(@product)
+      redirect_to @product
     else
       render 'edit'
     end
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
 
     def export_products
       send_data(
-        Products::ExportCsv.new(@products).perform,
+        Products::ExportCsv.new(display_products).perform,
         type: 'text/csv',
         filename: 'products.csv',
         disposition: 'attachment'
