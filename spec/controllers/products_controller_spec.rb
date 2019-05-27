@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'cancan/matchers'
 
 RSpec.describe ProductsController, type: :controller do
   let!(:user) { create(:admin_user) }
