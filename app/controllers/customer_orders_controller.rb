@@ -3,9 +3,7 @@ class CustomerOrdersController < ApplicationController
 
   def index; end
 
-  def show
-    customer_order
-  end
+  def show; end
 
   def cancel
     if customer_order.update_attribute(:canceled_at, Time.now)

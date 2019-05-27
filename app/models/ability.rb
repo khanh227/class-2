@@ -24,6 +24,6 @@ class Ability
 
     def customer_permissions
       can :read, Product
-      can [:read, :create, :cancel], CustomerOrder
+      can [:read, :cancel], CustomerOrder
     end
 end
