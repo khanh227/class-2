@@ -15,18 +15,6 @@ RSpec.describe CustomerOrdersController, type: :controller do
 
   before { sign_in user }
 
-  describe 'GET index' do
-    let(:user) { user_1 }
-
-    before { get :index }
-
-    specify do
-      expect(response).to have_http_status(200)
-      expect(response).to render_template(:index)
-      expect(assigns(:customer_orders)).to eq [customer_order_1, customer_order_2]
-    end
-  end
-
   describe 'GET show' do
     let(:user) { user_2 }
 

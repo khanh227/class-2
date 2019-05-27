@@ -1,10 +1,6 @@
 class CustomerOrdersController < ApplicationController
   load_and_authorize_resource
   
-  def index
-    @customer_orders = CustomerOrder.where(user_id: current_user.id)
-  end
-
   def show
     customer_order
   end
