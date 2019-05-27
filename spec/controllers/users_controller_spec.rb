@@ -11,7 +11,7 @@ RSpec.describe UsersController, type: :controller do
     before { get :index }
 
     specify do
-      expect(assigns(:users)).to eq [user_2, user_1]
+      expect(assigns(:users)).to eq [user_admin, user_1, user_2]
       expect(response).to have_http_status(200)
       expect(response).to render_template(:index)
     end
@@ -62,15 +62,6 @@ RSpec.describe UsersController, type: :controller do
         end.not_to change { user_2 }
         expect(response).to render_template(:edit)
       end
-    end
-  end
-
-  describe 'DELETE destroy' do
-    specify do
-      expect do
-        delete :destroy, params: { id: user_1.id }
-      end.to change(User, :count).by(-1)
-      expect(response).to redirect_to(users_path)
     end
   end
 end
