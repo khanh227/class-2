@@ -21,6 +21,7 @@ describe User do
       expect(ability).not_to be_able_to(:cancel, CustomerOrder)
       expect(ability).to be_able_to(:crud, Category)
       expect(ability).to be_able_to(:read, LunchOrder)
+      expect(ability).to be_able_to(:crud, Menu)
     end
   end
 
@@ -36,6 +37,7 @@ describe User do
       expect(ability).to be_able_to(:cancel, CustomerOrder)
       expect(ability).to be_able_to(:read, Category)
       expect(ability).not_to be_able_to(:crud, LunchOrder)
+      expect(ability).to be_able_to(:read, Menu)
     end
   end
 end

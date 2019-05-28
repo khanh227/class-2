@@ -13,6 +13,8 @@
             %li= product.name
       %td= menu.user.email
       %td.text-right
-        = link_to 'Edit', edit_menu_path(menu), class: 'btn btn-primary'
+        - if can? :update, Menu
+          = link_to 'Edit', edit_menu_path(menu), class: 'btn btn-primary'
         = link_to 'Show', menu_path(menu), class: 'btn btn-info'
-        = link_to 'Destroy', menu_path(menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+        - if can? :destroy, Menu
+          = link_to 'Destroy', menu_path(menu), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

@@ -25,6 +25,7 @@ class Ability
       cannot :cancel, CustomerOrder
       can :crud, Category
       can :read, LunchOrder
+      can :crud, Menu
     end
 
     def customer_permissions
@@ -32,5 +33,6 @@ class Ability
       can %i[read cancel], CustomerOrder, user_id: @user.id
       can :read, Category
       cannot :crud, LunchOrder
+      can :read, Menu
     end
 end
