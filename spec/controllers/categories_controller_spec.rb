@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
-  let!(:user_1) { create(:admin_user) }
-  let!(:user_2) { create(:restaurant_user) }
-  let!(:user_3) { create(:user) }
+  before { sign_in user }
+
   let!(:category_1) { create(:category) }
   let!(:category_2) { create(:category) }
 
   context 'Admin User' do
-    before { sign_in user_1 }
+    let!(:user) { create(:admin_user) }
 
     describe 'GET index' do
       before { get :index }
@@ -123,13 +122,14 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   context 'Restaurant User' do
-    before { sign_in user_2 }
+    let!(:user) { create(:restaurant_user) }
 
     describe 'GET index' do
       before { get :index }
 
       specify do
         expect(assigns(:categories)).to eq [category_1, category_2]
+        expect(response).to have_http_status(200)
         expect(response).to render_template(:index)
       end
     end
@@ -145,6 +145,7 @@ RSpec.describe CategoriesController, type: :controller do
     describe 'GET new' do
       specify do
         get :new
+        expect(response).to have_http_status(200)
         expect(response).to render_template(:new)
       end
     end
@@ -236,12 +237,13 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   context 'Customer User' do
-    before { sign_in user_3 }
+    let!(:user) { create(:user) }
 
     describe 'GET index' do
       before { get :index }
 
       specify do
+        expect(response).to have_http_status(200)
         expect(assigns(:categories)).to eq [category_1, category_2]
         expect(response).to render_template(:index)
       end
@@ -258,6 +260,7 @@ RSpec.describe CategoriesController, type: :controller do
     describe 'GET new' do
       specify do
         get :new
+        expect(response).to have_http_status(403)
         expect(response).not_to render_template(:new)
       end
     end

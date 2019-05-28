@@ -20,15 +20,17 @@ class Ability
 
   private
     def restaurant_permissions
-      can :crud, Product
+      can :crud, Product, user_id: @user.id
       can :read, CustomerOrder
       cannot :cancel, CustomerOrder
       can :crud, Category
+      can :read, LunchOrder
     end
 
     def customer_permissions
       can :read, Product
       can %i[read cancel], CustomerOrder, user_id: @user.id
       can :read, Category
+      cannot :crud, LunchOrder
     end
 end
