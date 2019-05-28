@@ -2,6 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :create, :read, :update, :destroy, to: :crud
+
     @user = user || User.new
 
     case
@@ -18,13 +20,15 @@ class Ability
 
   private
     def restaurant_permissions
-      can [:create, :read, :update, :destroy], Product
+      can :crud, Product
       can :read, CustomerOrder
       cannot :cancel, CustomerOrder
+      can :crud, Category
     end
 
     def customer_permissions
       can :read, Product
       can %i[read cancel], CustomerOrder, user_id: @user.id
+      can :read, Category
     end
 end
