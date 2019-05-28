@@ -1,18 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let!(:user_admin) { create(:user, role_user: :admin) }
-  let!(:user_restaurant) { create(:user, role_user: :restaurant) }
-  let!(:user_customer) { create(:user, role_user: :customer) }
+  before { sign_in user }
 
   describe 'admin user' do
-    before { sign_in user_admin }
+    let(:user) { create(:admin_user) }
+    let(:user_restaurant) { create(:restaurant_user) }
+    let(:user_customer) { create(:user) }
 
     describe 'GET index' do
       before { get :index }
 
       specify do
-        expect(assigns(:users)).to eq [user_admin, user_restaurant, user_customer]
+        expect(assigns(:users)).to eq [user, user_restaurant, user_customer]
         expect(response).to have_http_status(200)
         expect(response).to render_template(:index)
       end
@@ -68,7 +68,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'restaurant user' do
-    before { sign_in user_restaurant }
+    let(:user) { create(:restaurant_user) }
 
     describe 'GET index' do
       before { get :index }
@@ -80,14 +80,14 @@ RSpec.describe UsersController, type: :controller do
 
     describe 'GET show' do
       specify do
-        get :show, params: { id: user_restaurant.id }
+        get :show, params: { id: user.id }
         expect(response).to have_http_status(403)
       end
     end
 
     describe 'GET edit' do
       specify do
-        get :edit, params: { id: user_restaurant.id }
+        get :edit, params: { id: user.id }
         expect(response).to have_http_status(403)
       end
     end
@@ -101,7 +101,7 @@ RSpec.describe UsersController, type: :controller do
 
       context 'access denied' do
         before {
-          patch :update, params: { user: params, id: user_restaurant.id }
+          patch :update, params: { user: params, id: user.id }
         }
 
         specify do
@@ -112,7 +112,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'customer user' do
-    before { sign_in user_customer }
+    let(:user) { create(:user) }
 
     describe 'GET index' do
       before { get :index }
@@ -124,14 +124,14 @@ RSpec.describe UsersController, type: :controller do
 
     describe 'GET show' do
       specify do
-        get :show, params: { id: user_restaurant.id }
+        get :show, params: { id: user.id }
         expect(response).to have_http_status(403)
       end
     end
 
     describe 'GET edit' do
       specify do
-        get :edit, params: { id: user_restaurant.id }
+        get :edit, params: { id: user.id }
         expect(response).to have_http_status(403)
       end
     end
@@ -145,7 +145,7 @@ RSpec.describe UsersController, type: :controller do
 
       context 'access denied' do
         before {
-          patch :update, params: { user: params, id: user_restaurant.id }
+          patch :update, params: { user: params, id: user.id }
         }
 
         specify do
