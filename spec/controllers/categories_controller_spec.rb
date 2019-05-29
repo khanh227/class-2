@@ -135,7 +135,7 @@ RSpec.describe CategoriesController, type: :controller do
     end
   end
 
-  context 'Customer User' do
+  describe 'Customer User' do
     let!(:user) { create(:user) }
 
     describe 'GET index' do
