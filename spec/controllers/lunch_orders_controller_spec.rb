@@ -6,7 +6,7 @@ RSpec.describe LunchOrdersController, type: :controller do
   let!(:lunch_order_1) { create(:lunch_order, order_date: Date.today) }
   let!(:lunch_order_2) { create(:lunch_order, order_date: Date.today + 1) }
 
-  context 'Admin User' do
+  describe 'Admin User' do
     let!(:user) { create(:admin_user) }
 
     describe 'GET index' do
@@ -28,7 +28,7 @@ RSpec.describe LunchOrdersController, type: :controller do
     end
   end
 
-  context 'Restaurant User' do
+  describe 'Restaurant User' do
     let!(:user) { create(:restaurant_user) }
 
     describe 'GET index' do
@@ -51,7 +51,7 @@ RSpec.describe LunchOrdersController, type: :controller do
 
   end
 
-  context 'Customer User' do
+  describe 'Customer User' do
     let!(:user) { create(:user) }
 
     describe 'GET index' do
