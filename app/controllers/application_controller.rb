@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   rescue_from CanCan::AccessDenied, with: :render_403
+
+  private
+  def render_403
+    render file: "#{Rails.root}/public/403.html", status: 403, layout: false
+  end
 end

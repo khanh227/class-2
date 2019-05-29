@@ -1,0 +1,17 @@
+%h2 List of Users
+%hr
+.panel.panel-default
+%table.table.table-responsive.table-striped
+  %tr
+    %th Email
+    %th Role
+    %th
+  - @users.each do |user|
+    %tr
+      %td= user.email
+      %td= user.role_user
+      %td.text-right
+        - if can? :update, User
+          = link_to 'Edit', edit_user_path(user), class: 'btn btn-primary'
+        - if can? :read, User
+          = link_to 'Show', user_path(user), class: 'btn btn-info'

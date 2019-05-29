@@ -8,5 +8,7 @@
       = link_to 'Menu', menus_path, class: 'navbar-brand'
       = link_to 'Your Orders', customer_orders_path, class: 'navbar-brand'
     %ul.nav.navbar-nav.navbar-right
+      - if can? :manage, User
+        %li= link_to 'User Manage', users_path
       %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
   .container
