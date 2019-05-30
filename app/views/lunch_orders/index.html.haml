@@ -11,4 +11,5 @@
         %td= lunch_order.id
         %td= lunch_order.order_date.strftime("%d-%m-%Y")
         %td.text-right
-          = link_to 'Show', lunch_order_path(lunch_order), class: 'btn btn-info'
+          - if can? :read, LunchOrder
+            = link_to 'Show', lunch_order_path(lunch_order), class: 'btn btn-info'

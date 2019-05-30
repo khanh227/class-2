@@ -1,8 +1,10 @@
 .col-md-8
   .links.btn-group
     = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
-    = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
-    = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
+    - if can? :update, Menu
+      = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
+    - if can? :destroy, Menu
+      = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
   .book-info
     %table.table
       %tr
