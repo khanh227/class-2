@@ -13,7 +13,7 @@ RSpec.describe Menu, type: :model do
     let!(:menu_2) { create(:menu, product_ids: [product_3.id]) }
 
     specify do
-      expect(menu_1.products).to eq [product_1, product_2]
+      expect(menu_1.products.to_a).to eq [product_1, product_2]
       expect(menu_2.products).to eq [product_3]
     end
   end

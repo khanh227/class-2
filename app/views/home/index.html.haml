@@ -4,7 +4,7 @@
       Date: 
       = Time.current.strftime("%d/%m/%Y")
   .card-body
-    = simple_form_for :product, url: customer_orders_path, method: :post, html: { multipart: true} do |f|
+    = simple_form_for :product, url: customer_orders_path, action: :create, method: :post, html: { multipart: true } do |f|
       .container-fluid
       .row
         .col-lg-4
@@ -13,15 +13,15 @@
             - @products.each do |product|
               %ul
                 %li 
-                  %option{value: "#{product.id}"}= product.name
+                  %option{ name: "selected_product", value: "#{product.id}" }= product.name
           %div
-            %input#right{type: "button", value: ">"}
-            %input#rightall{type: "button", value: ">>"}
+            %input#right{ type: "button", value: ">" }
+            %input#rightall{ type: "button", value: ">>" }
         .col-lg-4 
           %h4 Your Orders
           %select#sbTwo{ multiple: "multiple", style: "font-size: 14px; width: 250px; height: 120px" }
           %div
-            %input#left{type: "button", value: "<"}
-            %input#leftall{type: "button", value: "<<"}
+            %input#left{ type: "button", value: "<" }
+            %input#leftall{ type: "button", value: "<<" }
       %hr
         = f.button :submit     
