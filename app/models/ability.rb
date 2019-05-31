@@ -30,7 +30,7 @@ class Ability
 
     def customer_permissions
       can :read, Product
-      can %i[read cancel], CustomerOrder, user_id: @user.id
+      can %i[read create cancel], CustomerOrder, user_id: @user.id
       can :read, Category
       cannot :crud, LunchOrder
       can :read, Menu
