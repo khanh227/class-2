@@ -1,14 +1,22 @@
 %nav.navbar.navbar-default
   .container
-    .navbar-header
-      %h1=app_name
-      = link_to 'Home', root_path , class: 'navbar-brand'
-      = link_to 'Category', categories_path , class: 'navbar-brand'
-      = link_to 'Product Management', products_path, class: 'navbar-brand'
-      = link_to 'Menu', menus_path, class: 'navbar-brand'
-      = link_to 'Your Orders', customer_orders_path, class: 'navbar-brand'
-    %ul.nav.navbar-nav.navbar-right
-      - if can? :manage, User
-        %li= link_to 'User Manage', users_path
-      %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
+    .row
+      .col-sm-12
+        .navbar-header
+          %h1=app_name
+    .row
+      .col-sm-12
+        %ul.nav.navbar-nav
+          %li= link_to 'Home', root_path
+          - if can? :manage, Category
+            %li= link_to 'Categories', categories_path
+          - if can? :manage, Product
+            %li= link_to 'Products', products_path
+          - if can? :manage, Menu
+            %li= link_to 'Menus', menus_path
+          - if can? :manage, User
+            %li= link_to 'Users', users_path
+        %ul.nav.navbar-nav.navbar-right
+          %li= link_to 'Your Orders', customer_orders_path
+          %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
   .container
