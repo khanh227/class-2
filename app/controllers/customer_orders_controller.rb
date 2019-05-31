@@ -10,11 +10,7 @@ class CustomerOrdersController < ApplicationController
     @customer_order.user_id = current_user.id
     @customer_order.lunch_order_id = LunchOrder.find_or_create_by(order_date: Date.today).id
     @customer_order.product_id = params[:selected_product]
-    debugger
-    if @customer_order.save
-      Product.where(id: 'value').quatity -= 1
-      redirect_to(customer_orders_path)
-    end
+    redirect_to(customer_orders_path) if @customer_order.save
   end
 
   def cancel
