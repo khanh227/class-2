@@ -4,24 +4,8 @@
       Date: 
       = Time.current.strftime("%d/%m/%Y")
   .card-body
-    = simple_form_for :product, url: customer_orders_path, action: :create, method: :post, html: { multipart: true } do |f|
-      .container-fluid
-      .row
-        .col-lg-4
-          %h4 Products
-          %select#sbOne{ multiple: "multiple", style: "font-size: 14px; width: 250px; height: 120px" }
-            - @products.each do |product|
-              %ul
-                %li 
-                  %option{ name: "selected_product", value: "#{product.id}" }= product.name
-          %div
-            %input#right{ type: "button", value: ">" }
-            %input#rightall{ type: "button", value: ">>" }
-        .col-lg-4 
-          %h4 Your Orders
-          %select#sbTwo{ multiple: "multiple", style: "font-size: 14px; width: 250px; height: 120px" }
-          %div
-            %input#left{ type: "button", value: "<" }
-            %input#leftall{ type: "button", value: "<<" }
-      %hr
-        = f.button :submit     
+    = simple_form_for :product, url: customer_orders_path, method: :post, html: { multipart: true} do |f|
+      %h4 Products
+      = f.collection_check_boxes :options, @products.pluck(:id, :name), :first, :last
+      %p
+      = f.button :submit     

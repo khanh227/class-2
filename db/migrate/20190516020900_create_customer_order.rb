@@ -5,7 +5,7 @@ class CreateCustomerOrder < ActiveRecord::Migration[5.2]
       t.integer :lunch_order_id
       t.integer :product_id
       t.datetime :canceled_at, default: nil
-      t.index [:user_id, :lunch_order_id], unique: true
+      t.index [:user_id, :lunch_order_id]
       t.timestamps
     end
   end
