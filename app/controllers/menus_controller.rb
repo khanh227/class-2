@@ -25,6 +25,10 @@ class MenusController < ApplicationController
   private
     def menu_params
       params[:menu][:product_ids]&.reject!(&:blank?)&.map!(&:to_i)
+<<<<<<< HEAD
       params.require(:menu).permit(:menu_name, :created_by, product_ids: [])
+=======
+      params.require(:menu).permit(:menu_name, :created_by, product_ids: [], :background_img)
+>>>>>>> 8feaa8a... Issue-40: Create Background for Menu
     end
 end
