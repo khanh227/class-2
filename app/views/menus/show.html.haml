@@ -1,4 +1,4 @@
-.col-md-8
+.col-md-8{style: "background-image:url(#{url_for(@menu.background_img)})"}
   .links.btn-group
     = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
     - if can? :update, Menu

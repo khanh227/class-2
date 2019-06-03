@@ -20,7 +20,7 @@
           %li.dropdown
             = link_to current_user.email, '', class: 'btn btn-secondary dropdown-toggle', aria: { expanded: false, haspopup: true }, data: { toggle: :dropdown }, role: :button
             .dropdown-menu{"aria-labelledby" => "dropdownMenuLink"}
-              = link_to 'Edit menu', '', class: 'dropdown-item'
+              = link_to 'Edit menu', edit_menu_path, class: 'dropdown-item'
               %br
               = link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
           %li= link_to 'Your Orders', customer_orders_path
