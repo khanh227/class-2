@@ -1,27 +1,31 @@
-.col-md-8
-  .links.btn-group
-    = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
-    - if can? :update, Menu
-      = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
-    - if can? :destroy, Menu
-      = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
-  .book-info
-    %table.table
-      %tr
-        %td
-          Menu Date: 
-        %td
-          = @menu.menu_date.strftime("%d/%m/%Y")
-      %tr
-        %td
-          List of Menu: 
-      %tr
-        %td
-          User:
-        %td
-          = @menu.user.email
-      %tr
-        %td
-          - @menu.products.each do |product|
-            %ul
-              %li= product.name
+- if current_user.restaurant?
+  .col-md-8{style: "background-image:/assets/star-half.png"}
+- else
+  .col-md-8
+    .links.btn-group
+      = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
+      - if can? :update, Menu
+        = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
+      - if can? :destroy, Menu
+        = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
+    .book-info
+      %table.table
+        %tr
+          %td
+            Menu Date: 
+          %td
+            = @menu.menu_name
+        %tr
+          %td
+            List of Menu: 
+        %tr
+          %td
+            User:
+          %td
+            = @menu.user.email
+        %tr
+          %td
+            - @menu.products.each do |product|
+              %ul
+                %li= product.name
+= image_tag url_for(@menu.background_img)
