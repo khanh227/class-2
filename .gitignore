@@ -6,8 +6,4 @@ log/
 .byebug_history
 .DS_Store
 coverage/
-<<<<<<< HEAD
 storage/
-=======
-storage/
->>>>>>> 9610f4b... update code
