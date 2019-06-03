@@ -31,3 +31,11 @@
 
 en:
   hello: "Hello world"
+  date:
+    formats:
+      # default: ! '%d-%m-%Y'
+      default: ! '%Y-%m-%d'
+      long: ! '%d %B %Y'
+      short: ! '%d %b'
+      slash: ! '%d/%m/%Y'
+      month: ! '%B %Y'
