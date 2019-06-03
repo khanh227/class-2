@@ -2,23 +2,21 @@
   .card-header
     %h4.bold
       Date: 
-      = Time.current
+      = @menu.menu_name
     %hr
   .card-body
     = simple_form_for :menu, url: customer_orders_path, html: { multipart: true} do |f|
       %table.table.table-responsive.table-striped
-        %th
-        %th Customer ID
-        %th Product Name
-        %th Price
-        %th Quatity
-        - @menus.each do |menu|
-          - menu.products.each do |product|
-            %tr
-              %td
-                %input{type: "checkbox"}
-              %td= menu.user.email
-              %td= product.name
-              %td= product.price
-              %td= f.input :quatity, as: :integer, label: false, input_html: { value: 0 }
+        %tr
+          %th
+          %th Product Name
+          %th Price
+          %th Quatity
+        - @menu.products.each do |product|
+          %tr
+            %td
+              %input{type: "checkbox"}
+            %td= product.name
+            %td= product.price
+            %td= f.input :quatity, as: :integer, label: false, input_html: { value: 0 }
       = f.button :submit, 'Save'
