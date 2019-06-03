@@ -1,22 +1,25 @@
-.cardborder-success.mb-3
-  .card-header
-    %h4.bold
-      Date: 
-      = @menu.menu_name
-    %hr
-  .card-body
-    = simple_form_for :menu, url: customer_orders_path, html: { multipart: true} do |f|
-      %table.table.table-responsive.table-striped
-        %tr
-          %th
-          %th Product Name
-          %th Price
-          %th Quatity
-        - @menu.products.each do |product|
+- if @menu.presence
+  .cardborder-success.mb-3
+    .card-header
+      %h4.bold
+        Date: 
+        = @menu.menu_name
+      %hr
+    .card-body
+      = simple_form_for :menu, url: customer_orders_path, html: { multipart: true} do |f|
+        %table.table.table-responsive.table-striped
           %tr
-            %td
-              %input{type: "checkbox"}
-            %td= product.name
-            %td= product.price
-            %td= f.input :quatity, as: :integer, label: false, input_html: { value: 0 }
-      = f.button :submit, 'Save'
+            %th
+            %th Product Name
+            %th Price
+            %th Quatity
+          - @menu.products.each do |product|
+            %tr
+              %td
+                %input{type: "checkbox"}
+              %td= product.name
+              %td= product.price
+              %td= f.input :quatity, as: :integer, label: false, input_html: { value: 0 }
+        = f.button :submit, 'Save'
+- else 
+  %h3 Menu is not presence
