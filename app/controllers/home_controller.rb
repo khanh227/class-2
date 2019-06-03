@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @products = Product.enabled
+    timenow = Time.current.to_date.strftime('%Y-%m-%d')
+    @menu = Menu.by_name(timenow).first
   end
 end
