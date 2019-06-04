@@ -1,27 +1,6 @@
-.col-md-8{style: "background-image:url(#{url_for(@menu.background_img)})"}
-  .links.btn-group
-    = link_to 'Back To Index', menus_path, class: 'btn btn-custom'
-    - if can? :update, Menu
-      = link_to 'Edit', edit_menu_path(@menu) , class: 'btn btn-custom'
-    - if can? :destroy, Menu
-      = link_to 'Delete', menu_path(@menu), method: :delete, data: {confirm: 'Are you sure?'} , class: 'btn btn-custom'
-  .book-info
-    %table.table
-      %tr
-        %td
-          Menu Date: 
-        %td
-          = @menu.menu_name
-      %tr
-        %td
-          List of Menu: 
-      %tr
-        %td
-          User:
-        %td
-          = @menu.user.email
-      %tr
-        %td
-          - @menu.products.each do |product|
-            %ul
-              %li= product.name
+- if @menu.background_img.attached?
+  .col-md-8{style: "background-image:url(#{url_for(@menu.background_img)})"}
+    = render partial: 'show_table'
+- else 
+  .col-md-8
+    = render partial: 'show_table'
