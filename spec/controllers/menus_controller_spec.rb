@@ -40,7 +40,7 @@ RSpec.describe MenusController, type: :controller do
       let(:params) do
       {
         menu: {
-          menu_date: '2019-05-15',
+          menu_name: 'menu 2019-05-15',
           product_ids: [product_1.id,product_2.id],
           created_by: user.id
         }
@@ -53,7 +53,7 @@ RSpec.describe MenusController, type: :controller do
             post :create, params: params
           end.to change(Menu, :count).by(1)
           menu = Menu.last
-          expect(menu.menu_date.to_s).to eq '2019-05-15'
+          expect(menu.menu_name.to_s).to eq 'menu 2019-05-15'
           expect(menu.products.first.name).to eq 'Product 1'
           expect(menu.products).to eq [product_1, product_2]
           expect(menu.user.email).to eq 'test@test.com'
@@ -143,7 +143,7 @@ RSpec.describe MenusController, type: :controller do
       let(:params) do
       {
         menu: {
-          menu_date: '2019-05-25',
+          menu_name: '2019-05-25',
           product_ids: [product_1.id,product_2.id],
           created_by: user.id
         }
@@ -156,7 +156,7 @@ RSpec.describe MenusController, type: :controller do
             post :create, params: params
           end.to change(Menu, :count).by(1)
           menu = Menu.last
-          expect(menu.menu_date.to_s).to eq '2019-05-25'
+          expect(menu.menu_name.to_s).to eq '2019-05-25'
           expect(menu.products.first.name).to eq 'Product 1'
           expect(menu.products).to eq [product_1, product_2]
           expect(menu.user.email).to eq 'test@test.com'
@@ -246,7 +246,7 @@ RSpec.describe MenusController, type: :controller do
       let(:params) do
       {
         menu: {
-          menu_date: '2019-05-30',
+          menu_name: '2019-05-30',
           product_ids: [product_1.id,product_2.id],
           created_by: user.id
         }
@@ -258,7 +258,7 @@ RSpec.describe MenusController, type: :controller do
           post :create, params: params
         end.not_to change { Menu }
         menu = Menu.last
-        expect(menu.menu_date.to_s).not_to eq '2019-05-30'
+        expect(menu.menu_name.to_s).not_to eq '2019-05-30'
         expect(menu.products.first.name).not_to eq 'Product 1'
         expect(menu.products).not_to eq [product_1, product_2]
         expect(menu.user.email).not_to eq 'testtest@test.com'

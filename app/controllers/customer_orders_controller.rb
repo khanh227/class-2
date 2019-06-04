@@ -21,6 +21,6 @@ class CustomerOrdersController < ApplicationController
     end
 
     def customer_order_params
-      params.require(:customer_order).permit(:user_id, :lunch_order_id, :product_id, :canceled_at)
+      params.require(:customer_order).permit(:user_id, :menu_id, :canceled_at)
     end
 end 
