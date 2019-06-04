@@ -1,8 +1,6 @@
 class CustomerOrder < ApplicationRecord
   belongs_to :user
-  belongs_to :product
-  belongs_to :lunch_order
+  belongs_to :menu
 
-  validates :user_id, uniqueness: { scope: :lunch_order_id }
-  
+  validates :user_id, uniqueness: { scope: :menu_id }
 end

@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :menu do
-    menu_date { Faker::Date.forward(20) }
+    menu_name { Faker::Food.dish }
     user
   end
 end
