@@ -6,7 +6,7 @@
         = @menu.menu_name
       %hr
     .card-body
-      = simple_form_for :menu, url: customer_orders_path, html: { multipart: true} do |f|
+      = simple_form_for :customer_order_item, url: customer_orders_path, html: { multipart: true} do |f|
         %table.table.table-responsive.table-striped
           %h4 
           %tr
@@ -16,8 +16,7 @@
             %th Quatity
           - @menu.products.each do |product|
             %tr
-              %td
-                %input{ type: "checkbox", name: "selected_products", value: "#{@menu.product_ids}" }
+              %td= f.check_box :selected_products, value: product.id
               %td= product.name
               %td= product.price
               %td= f.input :quatity, as: :integer, label: false, input_html: { value: 0 }

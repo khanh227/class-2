@@ -6,10 +6,7 @@ class CustomerOrdersController < ApplicationController
   def show; end
 
   def create
-    @customer_order = CustomerOrder.new
-    @customer_order.user_id = current_user.id
-    @customer_order.menu_id = @menu.id
-    redirect_to(customer_orders_path) if @customer_order.save
+    @customer_order = CustomerOrdersService.new(customer_order_params)
   end
 
   def cancel
@@ -23,8 +20,11 @@ class CustomerOrdersController < ApplicationController
   end
 
   private
-
     def customer_order_params
-      params.permit(:user_id, :menu_id, :canceled_at)
+      params.permit(:user_id, :menu_id, :canceled_at, :quatity)
     end
-end 
+
+    def menu_params
+      params.permit(:menu_name, :created_by, product_ids: [])
+    end
+end
