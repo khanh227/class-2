@@ -19,7 +19,7 @@
         %ul.nav.navbar-nav.navbar-right
           %li.dropdown
             = link_to current_user.email, '', class: 'btn btn-secondary dropdown-toggle', aria: { expanded: false, haspopup: true }, data: { toggle: 'dropdown' }
-            .dropdown-menu{"aria-labelledby" => "dropdownMenuLink"}
+            .dropdown-menu{'aria-labelledby': 'dropdownMenuLink'}
               = link_to 'Menu', menus_path, class: 'dropdown-item'
               %br
               = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'dropdown-item'

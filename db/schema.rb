@@ -44,33 +44,16 @@ ActiveRecord::Schema.define(version: 2019_06_03_030536) do
     t.datetime "deleted_at"
   end
 
-  create_table "customer_order_items", force: :cascade do |t|
-    t.integer "customer_order_id"
-    t.integer "product_id"
-    t.integer "quatity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "customer_orders", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "menu_id"
-    t.datetime "canceled_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id", "menu_id"], name: "index_customer_orders_on_user_id_and_menu_id", unique: true
-  end
-
-  create_table "lunch_orders", force: :cascade do |t|
-    t.date "order_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "menus", force: :cascade do |t|
     t.string "menu_name", null: false
     t.integer "product_ids", default: [], array: true
     t.integer "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lunch_orders", force: :cascade do |t|
+    t.date "order_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -86,6 +69,23 @@ ActiveRecord::Schema.define(version: 2019_06_03_030536) do
     t.integer "user_id"
     t.integer "category_id"
     t.datetime "deleted_at"
+  end
+
+  create_table "customer_orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "menu_id"
+    t.datetime "canceled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "menu_id"], name: "index_customer_orders_on_user_id_and_menu_id", unique: true
+  end
+
+  create_table "customer_order_items", force: :cascade do |t|
+    t.integer "customer_order_id"
+    t.integer "product_id"
+    t.integer "quatity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
