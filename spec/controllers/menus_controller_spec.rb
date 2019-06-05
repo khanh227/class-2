@@ -42,7 +42,7 @@ RSpec.describe MenusController, type: :controller do
         menu: {
           menu_name: 'menu 2019-05-15',
           product_ids: [product_1.id,product_2.id],
-          created_by: user.id,
+          created_by: user.id
         }
       }
       end
