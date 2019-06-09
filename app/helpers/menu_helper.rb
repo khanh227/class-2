@@ -4,11 +4,6 @@ module MenuHelper
   end
 
   def display_background_img(menu)
-    if menu.background_img.attached?
-      result = url_for(menu.background_img)
-    else
-      result = ''
-    end
-    result
+    menu.background_img.attached? ? url_for(menu.background_img) : ''
   end
 end
