@@ -25,6 +25,6 @@ class MenusController < ApplicationController
   private
     def menu_params
       params[:menu][:product_ids]&.reject!(&:blank?)&.map!(&:to_i)
-      params.require(:menu).permit(:menu_date, :created_by, product_ids: [])
+      params.require(:menu).permit(:menu_name, :created_by, product_ids: [])
     end
 end

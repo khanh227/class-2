@@ -6,7 +6,7 @@
     %th
   - @menus.each do |menu|
     %tr
-      %td= menu.menu_date.strftime("%d/%m/%Y")
+      %td= menu.menu_name
       %td
         - menu.products.each do |product|
           %ul
