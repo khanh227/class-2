@@ -6,7 +6,7 @@ describe MenuHelper, type: :helper do
     let!(:menu_2) {create(:menu)}
 
     specify do
-      expect(menu_list).to eq [[menu_1.menu_date, menu_1.id], [menu_2.menu_date, menu_2.id]]
+      expect(menu_list).to eq [[menu_1.menu_name, menu_1.id], [menu_2.menu_name, menu_2.id]]
     end
   end
 end
