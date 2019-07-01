@@ -53,10 +53,12 @@ RSpec.describe MenusController, type: :controller do
             post :create, params: params
           end.to change(Menu, :count).by(1)
           menu = Menu.last
+          menu.background_img.attach(io: File.open('spec/fixtures/sample.png'), filename: 'sample.png')
           expect(menu.menu_name.to_s).to eq 'menu 2019-05-15'
           expect(menu.products.first.name).to eq 'Product 1'
           expect(menu.products).to eq [product_1, product_2]
           expect(menu.user.email).to eq 'test@test.com'
+          expect(menu.background_img.attached?).to eq true
         end
       end
 

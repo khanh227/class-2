@@ -11,10 +11,13 @@ RSpec.describe Menu, type: :model do
     let(:product_3) { create(:product) }
     let!(:menu_1) { create(:menu, product_ids: [product_1.id, product_2.id]) }
     let!(:menu_2) { create(:menu, product_ids: [product_3.id]) }
-
+    let!(:menu_3) { create(:menu) }
+    
     specify do
+      menu_3.background_img.attach(io: File.open('spec/fixtures/sample.png'), filename: 'file.png')
       expect(menu_1.products).to eq [product_1, product_2]
       expect(menu_2.products).to eq [product_3]
+      expect(menu_3.background_img).to be_an_instance_of(ActiveStorage::Attached::One)
     end
   end
 end
