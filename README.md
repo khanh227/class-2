@@ -26,3 +26,10 @@ Things you may want to cover:
 Employers
 - Dai
 - Hung
+
+INSTALL
+* DATABASE
+ - bundle exec rake db:create
+ - bundle exec rake db:migrate
+ - bundle exec rake db:test:prepare
+ - bundle exec rake db:seed

@@ -10,10 +10,10 @@ postgres: &postgres
   schema_search_path: "public,shared_extensions"
 development:
   <<: *postgres
-  database: <%= ENV['DB_NAME'] || 'BookReview_development' %>
+  database: <%= ENV['DB_NAME'] || 'class2_development' %>
 test:
   <<: *postgres
-  database: <%= ENV['DB_NAME_TEST'] || 'BookReview_test' %><%= ENV['TEST_ENV_NUMBER'] %>
+  database: <%= ENV['DB_NAME_TEST'] || 'class2_test' %><%= ENV['TEST_ENV_NUMBER'] %>
 production:
   <<: *postgres
-  database: <%= ENV['DB_NAME'] || 'BookReview_production' %>
+  database: <%= ENV['DB_NAME'] || 'class2_production' %>
