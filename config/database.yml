@@ -3,10 +3,10 @@ postgres: &postgres
   encoding: unicode
   pool:     <%= ENV['RAILS_MAX_THREADS'] || 5 %>
   host: <%= ENV['DB_HOST'] || '127.0.0.1' %>
-  username: <%= ENV['DB_USER_NAME'] %>
-  password: <%= ENV['DB_PWD'] || '' %>
+  username: <%= ENV['DB_USER_NAME'] || 'postgres' %>
+  password: <%= ENV['DB_PWD'] || 'postgres' %>
   timeout:  5000
-  port: <%= ENV['DB_PORT'] || 5432 %>
+  port: <%= ENV['DB_PORT'] || 54320 %>
   schema_search_path: "public,shared_extensions"
 development:
   <<: *postgres
